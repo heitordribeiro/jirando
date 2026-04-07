@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jirando | Soluções Atlassian</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary:#0047AB;
+  --secondary:#3A8DFF;
+  --bg:#f5f7fb;
+  --text:#1e1e1e;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  scroll-behavior:smooth;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+  padding:15px 40px;
+  z-index:1000;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.menu{
+  display:flex;
+  gap:20px;
+}
+
+.menu a{
+  font-weight:500;
+  transition:.3s;
+}
+
+.menu a:hover{
+  color:var(--secondary);
+}
+
+/* HERO */
+#hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  position:relative;
+
+  /* BACKGROUND IMAGE */
+  background:url('back_home.jpg') no-repeat center center;
+  background-size:cover;
+}
+
+#hero::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.45);
+  z-index:0;
+}
+
+.hero-title{
+  font-size:4rem;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  position:relative;
+  z-index:1;
+}
+
+.hero-sub{
+  font-size:1.5rem;
+  margin:15px 0;
+  color:#fff;
+  position:relative;
+  z-index:1;
+}
+
+.btn{
+  margin-top:20px;
+  padding:15px 35px;
+  border-radius:50px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:600;
+  transition:.3s;
+  position:relative;
+  z-index:1;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+}
+
+/* SECTIONS */
+section{
+  padding:100px 20px;
+  max-width:1100px;
+  margin:auto;
+  opacity:0;
+  transform:translateY(40px);
+  transition:.8s;
+}
+
+section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h2{
+  text-align:center;
+  margin-bottom:40px;
+  color:var(--primary);
+}
+
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+
+.card{
+  padding:25px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+/* CONTACT */
+form{
+  max-width:500px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+input,textarea{
+  padding:14px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  background:var(--primary);
+  color:#fff;
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  width:65px;
+  height:65px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+  animation:pulse 2s infinite;
+}
+
+.whatsapp img{
+  width:32px;
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}
+  70%{box-shadow:0 0 0 15px rgba(37,211,102,0)}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero-title{font-size:2.8rem}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+  <strong>Jirando</strong>
+  <div class="menu">
+    <a href="#hero">Home</a>
+    <a href="#about">Sobre</a>
+    <a href="#services">Serviços</a>
+    <a href="#contact">Contato</a>
+  </div>
+</nav>
+</header>
+
+<!-- home session -->
+<section id="hero">
+  <h1 class="hero-title">Jirando</h1>
+  <p class="hero-sub">Consultoria especializada em soluções Atlassian</p>
+  <a href="#contact" class="btn">Fale Conosco</a>
+</section>
+
+<section id="about">
+  <h2>Sobre</h2>
+  <div class="grid">
+    <div class="card">Parceira estratégica Atlassian</div>
+    <div class="card">Implementação e integração completa</div>
+    <div class="card">Transformação digital com Jira & Cloud</div>
+  </div>
+</section>
+
+<section id="services">
+  <h2>Serviços</h2>
+  <div class="grid">
+    <div class="card">Jira Software</div>
+    <div class="card">Confluence</div>
+    <div class="card">Jira Service Management</div>
+    <div class="card">DevOps & ITIL</div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contato</h2>
+  <form onsubmit="sendMail(event)">
+    <input type="text" placeholder="Nome" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Mensagem"></textarea>
+    <button class="btn">Enviar</button>
+  </form>
+  <br>
+  <p style="margin-top:10px; text-align:center; font-weight:bold;">
+    Telefone: +55 (31) 991400841
+  </p>
+</section>
+
+<footer>
+© 2026 Jirando
+</footer>
+
+<!-- WhatsApp Floating -->
+<a href="https://wa.me/5531991400841" target="_blank" class="whatsapp">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
+
+<script>
+/* SCROLL ANIMATION */
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+  sections.forEach(sec=>{
+    if(sec.getBoundingClientRect().top<window.innerHeight-100){
+      sec.classList.add("visible");
+    }
+  });
+});
+
+/* EMAIL (basic) */
+function sendMail(e){
+  e.preventDefault();
+  alert("Mensagem enviada! (integre com EmailJS)");
+}
+</script>
+
+</body>
+</html>
