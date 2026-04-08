@@ -50,54 +50,46 @@ nav {
   align-items:center;
   flex-wrap:wrap;
 }
+/*.logo a { display:flex; align-items:center; gap:10px; cursor:pointer; }
+.logo img.site-logo { width:60px; transition:transform 0.3s; }
+.logo img.site-logo:hover { transform:scale(1.1); }*/
 
 /* ==============================
-   Logo Styles
+   Logo Styles (Fixed Header)
 ============================== */
 .logo a {
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  text-decoration: none;
 }
+
 .logo img.site-logo {
-  width: 60px;
+  width: 60px;           /* keep original logo size */
   height: auto;
   transition: transform 0.3s;
 }
-.logo img.site-logo:hover { transform: scale(1.1); }
-.logo span {
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1;
-  white-space: nowrap;
+
+.logo img.site-logo:hover {
+  transform: scale(1.1);
 }
 
-/* ==============================
-   Menu & Language Switch
-============================== */
-.menu {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  flex-wrap: wrap;
+.logo span {
+  color: #fff;           /* make text visible */
+  font-weight: 700;      /* bold for visibility */
+  font-size: 1.5rem;     /* adjust text size to match logo */
+  line-height: 1;        /* vertical alignment */
+  white-space: nowrap;   /* prevent wrapping */
 }
+/**/
+
+.menu { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
 .menu a {
-  color:#fff;
-  font-weight:500;
-  padding:5px 10px;
-  border-radius:5px;
-  transition:all 0.3s;
-  cursor:pointer;
+  color:#fff; font-weight:500; padding:5px 10px;
+  border-radius:5px; transition:all 0.3s; cursor:pointer;
 }
 .menu a:hover { background: rgba(255,255,255,0.2); }
-
-.lang-switch {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 .lang-switch img {
   width:28px; height:20px; cursor:pointer; border:1px solid #fff; border-radius:4px;
   transition: transform 0.3s;
@@ -105,32 +97,12 @@ nav {
 .lang-switch img:hover { transform:scale(1.2); }
 
 /* ==============================
-   Hamburger Menu (Mobile)
-============================== */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 4px;
-}
-.hamburger span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background: #fff;
-  border-radius: 2px;
-}
-
-/* Show menu on mobile when active */
-.menu.active { display: flex; flex-direction: column; width: 100%; gap: 10px; margin-top: 10px; }
-
-/* ==============================
    Hero Section
 ============================== */
 #hero {
   background: linear-gradient(to right, #e0f0ff, #ffffff);
   text-align:center;
-  height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--header-height)); /* adjust for fixed header */
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -160,7 +132,7 @@ section {
   padding: 80px 20px; 
   max-width:1100px; 
   margin:auto; 
-  scroll-margin-top: var(--header-height);
+  scroll-margin-top: var(--header-height); /* offset for fixed header */
 }
 section h2 {
   color: var(--primary);
@@ -170,7 +142,8 @@ section h2 {
   position:relative;
 }
 section h2::after {
-  content:''; display:block;
+  content:'';
+  display:block;
   width:60px; height:3px;
   background: var(--secondary);
   margin:10px auto 0;
@@ -234,9 +207,11 @@ section h2::after {
   box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 .icon-btn img { width:32px; height:32px; transition: transform 0.3s; }
+
 .icon-btn.email { background:#fff; }
 .icon-btn.email:hover { background: linear-gradient(135deg, var(--primary), var(--secondary)); }
 .icon-btn.email:hover img { filter: brightness(0) invert(1); }
+
 .icon-btn.whatsapp { background:#fff; }
 .icon-btn.whatsapp:hover {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -260,14 +235,12 @@ footer a { color: var(--accent); text-decoration: underline; }
    Responsiveness
 ============================== */
 @media(max-width:768px) {
-  .menu { display:none; } /* hide menu on mobile initially */
-  .hamburger { display:flex; } /* show hamburger */
+  .menu { flex-direction: column; gap:10px; }
   .hero-title { font-size:3rem; }
   .hero-subtitle { font-size:1.6rem; }
   .hero-desc { font-size:1.1rem; }
   .grid, .about-content { flex-direction: column; }
 }
-
 @media(max-width:480px) {
   .logo img.site-logo { width:50px; }
   .hero-title { font-size:2.4rem; }
@@ -276,82 +249,4 @@ footer a { color: var(--accent); text-decoration: underline; }
   section h2 { font-size:2rem; }
   .card h3, .about-block h3 { font-size:1.3rem; }
   .card p, .about-block p { font-size:0.95rem; }
-}
-/* ==============================
-   Hamburger Icon (Mobile)
-============================== */
-#hamburger {
-  display: none; /* hidden on desktop */
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  cursor: pointer;
-}
-
-#hamburger span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background: #fff;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* ==============================
-   Mobile Menu
-============================== */
-.menu {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-}
-
-.menu.active {
-  max-height: 500px; /* enough to show all items */
-  opacity: 1;
-}
-
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  #hamburger {
-    display: flex;
-  }
-
-  .menu {
-    flex-direction: column;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-  }
-
-  .menu a {
-    padding: 10px 15px;
-    width: 100%;
-    border-radius: 5px;
-  }
-
-  .lang-switch {
-    margin-top: 10px;
-    flex-direction: row;
-    gap: 10px;
-  }
-}
-
-/* Optional: Hamburger animation when active */
-#hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-#hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-#hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
 }
