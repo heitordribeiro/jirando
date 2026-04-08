@@ -71,3 +71,32 @@ async function loadPartial(id, url) {
 // Load header and footer partials dynamically
 loadPartial('header-placeholder', 'partials/header.html');
 loadPartial('footer-placeholder', 'partials/footer.html');
+
+// Function to set language
+function setLang(lang) {
+  document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.lang.' + lang).forEach(el => el.classList.add('active'));
+}
+
+// Detect browser language
+function detectBrowserLang() {
+  const lang = navigator.language || navigator.userLanguage; // e.g., "pt-BR", "en-US"
+  if (lang.startsWith('pt')) return 'pt';
+  if (lang.startsWith('en')) return 'en';
+  if (lang.startsWith('es')) return 'es';
+  return 'pt'; // default fallback
+}
+
+// On page load, set language based on browser
+document.addEventListener('DOMContentLoaded', () => {
+  const browserLang = detectBrowserLang();
+  setLang(browserLang);
+
+  // Optional: highlight the selected flag
+  document.querySelectorAll('.lang-switch img').forEach(img => {
+    img.style.opacity = 0.5;
+  });
+  const flagMap = { 'pt':'br.png', 'en':'us.png', 'es':'es.png' };
+  const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[browserLang]}']`);
+  if(activeFlag) activeFlag.style.opacity = 1;
+});
