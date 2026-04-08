@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==============================
 // EmailJS Initialization
 // ==============================
-if (typeof emailjs !== 'undefined') {
-  emailjs.init('YOUR_PUBLIC_KEY');
-}
+emailjs.init('YOUR_PUBLIC_KEY');
 
 // ==============================
 // Smooth Scroll for Anchors
@@ -77,20 +75,22 @@ function sendWhatsApp() {
 }
 
 // ==============================
-// Redirect index.html to browser language
+// Redirect index.html to Browser Language
 // ==============================
 document.addEventListener('DOMContentLoaded', () => {
   const page = window.location.pathname.split("/").pop().toLowerCase();
+  
+  // Only redirect if we are on the main index.html
   if(page === '' || page === 'index.html') {
-    const lang = (navigator.language || navigator.userLanguage || 'pt').toLowerCase();
-    if(lang.startsWith('en')) window.location.replace('en-us.html');
-    else if(lang.startsWith('es')) window.location.replace('es-es.html');
-    else window.location.replace('pt-br.html');
+    const lang = navigator.language || navigator.userLanguage;
+    if(lang.startsWith('en')) window.location.href = 'en-us.html';
+    else if(lang.startsWith('es')) window.location.href = 'es-es.html';
+    else window.location.href = 'pt-br.html'; // default
   }
 });
 
 // ==============================
-// Load Header & Footer Partials
+// Load Header & Footer Partials (Absolute Paths)
 // ==============================
 async function loadPartial(id, url){
   try {
@@ -103,8 +103,8 @@ async function loadPartial(id, url){
   }
 }
 
-// Load header and footer on every page
+// Load header and footer for all pages
 document.addEventListener('DOMContentLoaded', () => {
-  loadPartial('header-placeholder', 'partials/header.html');
-  loadPartial('footer-placeholder', 'partials/footer.html');
+  loadPartial('header-placeholder', '/partials/header.html'); // use absolute path
+  loadPartial('footer-placeholder', '/partials/footer.html');
 });
