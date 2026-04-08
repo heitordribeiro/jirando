@@ -58,26 +58,6 @@ if(contactForm) {
 }
 
 // ==============================
-// Footer - Contact
-// ==============================
-document.querySelectorAll('a[href="#contact"]').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    const contactSection = document.querySelector('#contact');
-    const footer = document.querySelector('footer');
-    
-    // Calculate the offset to scroll the page just past the contact section
-    const scrollToPosition = contactSection.offsetTop + contactSection.offsetHeight - window.innerHeight + footer.offsetHeight;
-
-    // Smooth scroll to the position
-    window.scrollTo({
-      top: scrollToPosition,
-      behavior: 'smooth'
-    });
-  });
-});
-
-// ==============================
 // WhatsApp Icon
 // ==============================
 const whatsappIcon = document.getElementById('whatsappIcon');
