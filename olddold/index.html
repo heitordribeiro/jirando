@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jirando</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <a href="#hero">
+        <img src="assets/images/logo.gif" alt="Logo" class="site-logo">
+      </a>
+    </div>
+
+    <div class="menu">
+      <a href="#hero">Home</a>
+      <a href="#about">Sobre Nós</a>
+      <a href="#services">Serviços</a>
+      <a href="#success">Casos</a>
+      <a href="#contact">Contato</a>
+
+      <div class="lang-switch">
+        <img src="https://flagcdn.com/w20/br.png" onclick="changeLang('pt-br.html')">
+        <img src="https://flagcdn.com/w20/us.png" onclick="changeLang('en-us.html')">
+        <img src="https://flagcdn.com/w20/es.png" onclick="changeLang('es-es.html')">
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section id="hero">
+  <h1 class="hero-title">Jirando</h1>
+  <h5>by HDR Soluções em TI</h5>
+  <h2 class="hero-subtitle">Consultoria especializada em soluções Atlassian</h2>
+  <p class="hero-desc">Transformamos a forma como sua equipe trabalha</p>
+  <a href="#contact">Fale Conosco</a>
+</section>
+
+<section id="about">
+  <h2>Sobre a Jirando</h2>
+  <div class="about-content">
+    <div class="about-block">
+      <h3>Parceira Estratégica</h3>
+      <p>...</p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <h2>Serviços</h2>
+  <div class="grid">
+    <div class="card"><h3>Jira Software</h3></div>
+  </div>
+</section>
+
+<section id="success">
+  <h2>Casos de Sucesso</h2>
+  <div class="grid">
+    <div class="card"><h3>Projeto X</h3></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contato</h2>
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Nome" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <textarea id="message" required></textarea>
+    <button class="btn">Enviar</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2026 Jirando</p>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

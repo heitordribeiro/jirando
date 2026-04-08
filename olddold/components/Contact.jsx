@@ -5,11 +5,17 @@ export default function Contact() {
   const sendEmail = (e) => {
     e.preventDefault()
 
+    // Prevent crash if not configured
+    if (!import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
+      alert('Form temporarily unavailable')
+      return
+    }
+
     emailjs.sendForm(
-      'YOUR_SERVICE_ID',
-      'YOUR_TEMPLATE_ID',
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
       e.target,
-      'YOUR_PUBLIC_KEY'
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     )
     .then(() => alert('Email enviado!'))
     .catch(() => alert('Erro ao enviar'))
