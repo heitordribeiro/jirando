@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==============================
 // EmailJS Initialization
 // ==============================
-emailjs.init('YOUR_PUBLIC_KEY');
+if (typeof emailjs !== 'undefined') {
+  emailjs.init('YOUR_PUBLIC_KEY');
+}
 
 // ==============================
 // Smooth Scroll for Anchors
@@ -78,13 +80,13 @@ function sendWhatsApp() {
 // Redirect index.html to browser language
 // ==============================
 document.addEventListener('DOMContentLoaded', () => {
-  const page = window.location.pathname.split("/").pop().toLowerCase();
+  const path = window.location.pathname.split("/").pop().toLowerCase();
   
-  // Only redirect if we are on the main index.html
-  if(page === '' || page === 'index.html') {
-    const lang = navigator.language || navigator.userLanguage;
-    if(lang.startsWith('en')) window.location.href = 'en-us.html';
-    else if(lang.startsWith('es')) window.location.href = 'es-es.html';
-    else window.location.href = 'pt-br.html'; // default
+  if(path === '' || path === 'index.html') {
+    const lang = (navigator.language || navigator.userLanguage || 'pt').toLowerCase();
+    
+    if(lang.startsWith('en')) window.location.replace('en-us.html');
+    else if(lang.startsWith('es')) window.location.replace('es-es.html');
+    else window.location.replace('pt-br.html');
   }
 });
