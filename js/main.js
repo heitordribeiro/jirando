@@ -73,11 +73,24 @@ function sendWhatsApp() {
 }
 
 // ==============================
-// Language Switching
+// Multi-Language Switching
 // ==============================
 function setLang(lang) {
-  document.querySelectorAll('.lang').forEach(el=> el.classList.remove('active'));
-  document.querySelectorAll('.lang.'+lang).forEach(el=> el.classList.add('active'));
+  // Update active flags
+  document.querySelectorAll('.lang-switch img').forEach(img => img.style.opacity = 0.5);
+  const flagMap = { 'pt':'br.png','en':'us.png','es':'es.png' };
+  const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[lang]}']`);
+  if(activeFlag) activeFlag.style.opacity = 1;
+
+  // Update all elements with class "lang-text" using innerHTML to preserve bold tags
+  document.querySelectorAll('.lang-text').forEach(el => {
+    const html = el.getAttribute(`data-${lang}`);
+    if(html) el.innerHTML = html;
+  });
+
+  // Optional: add active class to any elements with .lang class
+  document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.lang.'+lang).forEach(el => el.classList.add('active'));
 }
 
 // Detect browser language on load
@@ -89,14 +102,10 @@ function detectBrowserLang() {
   return 'pt';
 }
 
+// Set language on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', ()=>{
   const browserLang = detectBrowserLang();
   setLang(browserLang);
-
-  document.querySelectorAll('.lang-switch img').forEach(img=> img.style.opacity=0.5);
-  const flagMap = { 'pt':'br.png','en':'us.png','es':'es.png' };
-  const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[browserLang]}']`);
-  if(activeFlag) activeFlag.style.opacity = 1;
 });
 
 // ==============================
