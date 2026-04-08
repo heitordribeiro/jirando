@@ -99,6 +99,8 @@ async function loadPartial(id, url){
   }
 }
 
+
+
 // ==============================
 // Initialize Header Language
 // ==============================
@@ -116,29 +118,43 @@ function initHeaderLang() {
   });
 }
 
+
+// ==============================
+// Load Header & Footer Partials
+// ==============================
+async function loadPartial(id, url){
+  const res = await fetch(url);
+  const html = await res.text();
+  document.getElementById(id).innerHTML = html;
+
+  if(id === 'header-placeholder') {
+    initHeaderLang();
+
+    // ===== Hamburger Menu Toggle AFTER header is loaded =====
+    const hamburger = document.querySelector('.hamburger');
+    const menu = document.querySelector('.menu');
+
+    if(hamburger && menu){
+      hamburger.addEventListener('click', () => {
+        menu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+      });
+
+      // Close menu when clicking a link
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('active');
+          hamburger.classList.remove('active');
+        });
+      });
+    }
+  }
+}
+
+
 // ==============================
 // Load partials
 // ==============================
 loadPartial('header-placeholder','partials/header.html');
 loadPartial('footer-placeholder','partials/footer.html');
 
-// ==============================
-// Mobile Hamburger Menu Toggle
-// ==============================
-const hamburger = document.querySelector('.hamburger');
-const menu = document.querySelector('.menu');
-
-if(hamburger && menu){
-  hamburger.addEventListener('click', () => {
-    menu.classList.toggle('active');
-    hamburger.classList.toggle('active');
-  });
-
-  // Close menu when clicking a link
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('active');
-      hamburger.classList.remove('active');
-    });
-  });
-}
