@@ -124,6 +124,7 @@ async function loadPartial(id, url){
 
 
 
+
 // ==============================
 // Initialize Header Language
 // ==============================
@@ -151,7 +152,7 @@ async function loadPartial(id, url){
   document.getElementById(id).innerHTML = html;
 
   if(id === 'header-placeholder') {
-    initHeaderLang();
+    initHeaderLang(); // Initialize language for header
 
     // ===== Hamburger Menu Toggle AFTER header is loaded =====
     const hamburger = document.querySelector('.hamburger');
@@ -172,8 +173,11 @@ async function loadPartial(id, url){
       });
     }
   }
-}
 
+  if(id === 'footer-placeholder') {
+    initHeaderLang(); // Initialize language for footer as well
+  }
+}
 
 // ==============================
 // Load partials
