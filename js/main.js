@@ -96,7 +96,6 @@ async function loadPartial(id, url){
 
   if(id === 'header-placeholder') {
     initHeaderLang();
-    initHamburger(); // initialize mobile menu here
   }
 }
 
@@ -110,6 +109,7 @@ function initHeaderLang() {
   if(page.includes('en-us')) lang = 'en';
   else if(page.includes('es-es')) lang = 'es';
 
+  // Update menu items only (logo is static)
   document.querySelectorAll('.lang-text').forEach(el => {
     const text = el.getAttribute(`data-${lang}`);
     if(text) el.innerHTML = text;
@@ -117,21 +117,14 @@ function initHeaderLang() {
 }
 
 // ==============================
-// Initialize Hamburger Menu
-// ==============================
-function initHamburger() {
-  const hamburger = document.getElementById('hamburger');
-  const menu = document.querySelector('.menu');
-
-  if(hamburger && menu) {
-    hamburger.addEventListener('click', () => {
-      menu.classList.toggle('active');
-    });
-  }
-}
-
-// ==============================
 // Load partials
 // ==============================
 loadPartial('header-placeholder','partials/header.html');
 loadPartial('footer-placeholder','partials/footer.html');
+
+const hamburger = document.getElementById('hamburger');
+const menu = document.querySelector('.menu');
+
+hamburger.addEventListener('click', () => {
+  menu.classList.toggle('active');
+});
