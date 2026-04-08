@@ -19,21 +19,33 @@ function clearStorage() {
 emailjs.init('YOUR_PUBLIC_KEY');
 
 // ==============================
-// Smooth Scroll for Anchors
+// Smooth Scroll for Anchors + Contact Button Scroll
 // ==============================
 document.addEventListener('click', function(e) {
   const anchor = e.target.closest('a[href^="#"]');
   if (!anchor) return;
 
   e.preventDefault();
-  const target = document.querySelector(anchor.getAttribute('href'));
-  if (!target) return;
+  const targetId = anchor.getAttribute('href').substring(1);
+  const target = document.getElementById(targetId);
 
-  const header = document.querySelector('header');
-  const headerHeight = header ? header.offsetHeight : 0;
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+  if (targetId === 'contact') {
+    // Scroll to bottom of page smoothly
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 
-  window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    // Show footer
+    const footer = document.getElementById('footer');
+    if (footer) footer.style.display = 'block';
+
+    // Optionally focus the contact section
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (target) {
+    // Normal smooth scroll for other anchors
+    const header = document.querySelector('header');
+    const headerHeight = header ? header.offsetHeight : 0;
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+  }
 });
 
 // ==============================
@@ -58,26 +70,23 @@ if(contactForm) {
 }
 
 // ==============================
-// WhatsApp Icon
+// WhatsApp Icon Float
 // ==============================
 const whatsappIcon = document.getElementById('whatsappIcon');
 const footer = document.getElementById('footer');
 
 window.addEventListener('scroll', () => {
+  if (!whatsappIcon || !footer) return;
   const footerRect = footer.getBoundingClientRect();
-  const iconHeight = whatsappIcon.offsetHeight + 20; // icon height + margin
   const windowHeight = window.innerHeight;
 
   if (footerRect.top < windowHeight) {
-    // Stop above footer
     const overlap = windowHeight - footerRect.top;
     whatsappIcon.style.bottom = `${overlap + 20}px`;
   } else {
-    // Normal floating
     whatsappIcon.style.bottom = '20px';
   }
 });
-
 
 // ==============================
 // WhatsApp Send Function
@@ -99,48 +108,28 @@ document.addEventListener('DOMContentLoaded', () => {
   clearStorage();
 
   const page = window.location.pathname.split("/").pop().toLowerCase();
-  
   if(page === '' || page === 'index.html') {
     const lang = navigator.language || navigator.userLanguage;
     if(lang.startsWith('pt')) window.location.href = 'pt-br.html';
     else if(lang.startsWith('es')) window.location.href = 'es-es.html';
-    else window.location.href = 'en-us.html'; // default
+    else window.location.href = 'en-us.html';
   }
 });
-
-// ==============================
-// Load Header & Footer
-// ==============================
-async function loadPartial(id, url){
-  const res = await fetch(url);
-  const html = await res.text();
-  document.getElementById(id).innerHTML = html;
-
-  if(id === 'header-placeholder') {
-    initHeaderLang();
-  }
-}
-
-
-
 
 // ==============================
 // Initialize Header Language
 // ==============================
 function initHeaderLang() {
   const page = window.location.pathname.split("/").pop().toLowerCase();
-
-  let lang = 'pt'; // default
+  let lang = 'pt';
   if(page.includes('en-us')) lang = 'en';
   else if(page.includes('es-es')) lang = 'es';
 
-  // Update menu items only (logo is static)
   document.querySelectorAll('.lang-text').forEach(el => {
     const text = el.getAttribute(`data-${lang}`);
     if(text) el.innerHTML = text;
   });
 }
-
 
 // ==============================
 // Load Header & Footer Partials
@@ -151,19 +140,17 @@ async function loadPartial(id, url){
   document.getElementById(id).innerHTML = html;
 
   if(id === 'header-placeholder') {
-    initHeaderLang(); // Initialize language for header
+    initHeaderLang();
 
-    // ===== Hamburger Menu Toggle AFTER header is loaded =====
+    // Hamburger Menu Toggle
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.menu');
-
     if(hamburger && menu){
       hamburger.addEventListener('click', () => {
         menu.classList.toggle('active');
         hamburger.classList.toggle('active');
       });
 
-      // Close menu when clicking a link
       menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
           menu.classList.remove('active');
@@ -174,14 +161,17 @@ async function loadPartial(id, url){
   }
 
   if(id === 'footer-placeholder') {
-    initHeaderLang(); // Initialize language for footer as well
+    initHeaderLang();
   }
 }
 
-// Detect when the user navigates to the contact page
+// ==============================
+// Show Footer on Contact Page
+// ==============================
 window.addEventListener("load", function() {
   if (window.location.pathname === '/session-contact') {
-    document.querySelector('footer').style.display = 'block';
+    const footer = document.querySelector('footer');
+    if (footer) footer.style.display = 'block';
   }
 });
 
@@ -190,4 +180,3 @@ window.addEventListener("load", function() {
 // ==============================
 loadPartial('header-placeholder','partials/header.html');
 loadPartial('footer-placeholder','partials/footer.html');
-
