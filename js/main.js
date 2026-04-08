@@ -73,20 +73,34 @@ function sendWhatsApp() {
 }
 
 // ==============================
-// Language Switching Functions
+// Multi-Language Header Switching
 // ==============================
-function setLang(lang) {
-  // Update menu text
+const langPages = {
+  'pt': 'pt-br.html',
+  'en': 'en-us.html',
+  'es': 'es-es.html'
+};
+
+function setHeaderLang(lang) {
+  // Update header/menu text
   document.querySelectorAll('.lang-text').forEach(el => {
-    const html = el.getAttribute(`data-${lang}`);
-    if(html) el.innerHTML = html;
+    const text = el.dataset[lang];
+    if(text) el.textContent = text;
   });
 
-  // Update active flags
+  // Highlight active flag
   document.querySelectorAll('.lang-switch img').forEach(img => img.style.opacity = 0.5);
-  const flagMap = { 'pt':'br.png', 'en':'us.png', 'es':'es.png' };
+  const flagMap = { 'pt':'br.png','en':'us.png','es':'es.png' };
   const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[lang]}']`);
   if(activeFlag) activeFlag.style.opacity = 1;
+}
+
+function switchLang(lang) {
+  setHeaderLang(lang);           // update header immediately
+  const page = langPages[lang];  // navigate to corresponding HTML page
+  if(page) {
+    setTimeout(() => { window.location.href = page; }, 100);
+  }
 }
 
 function detectBrowserLang() {
@@ -97,20 +111,19 @@ function detectBrowserLang() {
   return 'pt';
 }
 
-// Initialize language switch after header loads
 function initLanguageSwitch() {
   // Attach click handlers to flags
   document.querySelectorAll('.lang-switch img').forEach(img => {
     img.addEventListener('click', () => {
       const lang = img.alt.startsWith('Português') ? 'pt' :
                    img.alt.startsWith('English') ? 'en' : 'es';
-      setLang(lang);
+      switchLang(lang);
     });
   });
 
-  // Detect browser language
+  // Detect browser language on first load
   const browserLang = detectBrowserLang();
-  setLang(browserLang);
+  setHeaderLang(browserLang);
 }
 
 // ==============================
