@@ -7,10 +7,12 @@ function clearAllCookies() {
     document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
   });
 }
+
 function clearStorage() {
   localStorage.clear();
   sessionStorage.clear();
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   clearAllCookies();
   clearStorage();
@@ -73,49 +75,16 @@ function sendWhatsApp() {
 }
 
 // ==============================
-// Header Language Handling
+// Redirect index.html to browser language
 // ==============================
-function initHeaderLanguage() {
-  const path = window.location.pathname.toLowerCase();
-  let lang = 'pt'; // default
-
-  if(path.includes('en-us.html')) lang = 'en';
-  else if(path.includes('es-es.html')) lang = 'es';
-  else {
-    // Fallback: detect browser language
-    const browserLang = navigator.language || navigator.userLanguage;
-    if(browserLang.startsWith('en')) lang = 'en';
-    else if(browserLang.startsWith('es')) lang = 'es';
-    else lang = 'pt';
+document.addEventListener('DOMContentLoaded', () => {
+  const page = window.location.pathname.split("/").pop().toLowerCase();
+  
+  // Only redirect if we are on the main index.html
+  if(page === '' || page === 'index.html') {
+    const lang = navigator.language || navigator.userLanguage;
+    if(lang.startsWith('en')) window.location.href = 'en-us.html';
+    else if(lang.startsWith('es')) window.location.href = 'es-es.html';
+    else window.location.href = 'pt-br.html'; // default
   }
-
-  // Update menu text
-  document.querySelectorAll('.lang-text').forEach(el => {
-    const text = el.getAttribute(`data-${lang}`);
-    if(text) el.innerHTML = text;
-  });
-
-  // Update active flag
-  document.querySelectorAll('.lang-switch img').forEach(img => img.style.opacity = 0.5);
-  const flagMap = { 'pt':'br.png', 'en':'us.png', 'es':'es.png' };
-  const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[lang]}']`);
-  if(activeFlag) activeFlag.style.opacity = 1;
-}
-
-// ==============================
-// Load Header & Footer Partials
-// ==============================
-async function loadPartial(id, url){
-  const res = await fetch(url);
-  const html = await res.text();
-  document.getElementById(id).innerHTML = html;
-
-  // Initialize header language after header loads
-  if(id === 'header-placeholder') {
-    initHeaderLanguage();
-  }
-}
-
-// Load partials
-loadPartial('header-placeholder','partials/header.html');
-loadPartial('footer-placeholder','partials/footer.html');
+});
