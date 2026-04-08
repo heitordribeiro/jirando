@@ -335,16 +335,13 @@ footer a { color: var(--accent); text-decoration: underline; }
 
 /* success session adjustment size */
 #success {
-  height: 100vh; /* Full viewport height */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Center content vertically */
+  height: auto; /* Remove 100vh */
   padding: 20px;
 }
 
 #success .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
   gap: 20px;
   justify-items: center;
 }
@@ -357,6 +354,19 @@ footer a { color: var(--accent); text-decoration: underline; }
 }
 
 #success img {
-  width: 100%;
+  width: 80%; /* Make the images smaller (you can adjust this to your liking) */
   height: auto;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  #success .grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #success .grid {
+    grid-template-columns: 1fr; /* 1 column for mobile */
+  }
 }
