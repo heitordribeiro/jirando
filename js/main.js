@@ -57,6 +57,29 @@ if(contactForm) {
   });
 }
 
+
+// ==============================
+// WhatsApp Icon
+// ==============================
+const whatsappIcon = document.getElementById('whatsappIcon');
+const footer = document.getElementById('footer');
+
+window.addEventListener('scroll', () => {
+  const footerRect = footer.getBoundingClientRect();
+  const iconHeight = whatsappIcon.offsetHeight + 20; // icon height + margin
+  const windowHeight = window.innerHeight;
+
+  if (footerRect.top < windowHeight) {
+    // Stop above footer
+    const overlap = windowHeight - footerRect.top;
+    whatsappIcon.style.bottom = `${overlap + 20}px`;
+  } else {
+    // Normal floating
+    whatsappIcon.style.bottom = '20px';
+  }
+});
+
+
 // ==============================
 // WhatsApp Send Function
 // ==============================
