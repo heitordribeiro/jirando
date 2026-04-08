@@ -13,11 +13,6 @@ function clearStorage() {
   sessionStorage.clear();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  clearAllCookies();
-  clearStorage();
-});
-
 // ==============================
 // EmailJS Initialization
 // ==============================
@@ -78,9 +73,11 @@ function sendWhatsApp() {
 // Redirect index.html to Browser Language
 // ==============================
 document.addEventListener('DOMContentLoaded', () => {
+  clearAllCookies();
+  clearStorage();
+
   const page = window.location.pathname.split("/").pop().toLowerCase();
   
-  // Only redirect if we are on the main index.html
   if(page === '' || page === 'index.html') {
     const lang = navigator.language || navigator.userLanguage;
     if(lang.startsWith('en')) window.location.href = 'en-us.html';
@@ -90,21 +87,37 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==============================
-// Load Header & Footer Partials (Absolute Paths)
+// Load Header & Footer
 // ==============================
 async function loadPartial(id, url){
-  try {
-    const res = await fetch(url);
-    if(!res.ok) throw new Error(`Failed to load ${url}`);
-    const html = await res.text();
-    document.getElementById(id).innerHTML = html;
-  } catch(err) {
-    console.error(err);
+  const res = await fetch(url);
+  const html = await res.text();
+  document.getElementById(id).innerHTML = html;
+
+  if(id === 'header-placeholder') {
+    initHeaderLang();
   }
 }
 
-// Load header and footer for all pages
-document.addEventListener('DOMContentLoaded', () => {
-  loadPartial('header-placeholder', '/partials/header.html'); // use absolute path
-  loadPartial('footer-placeholder', '/partials/footer.html');
-});
+// ==============================
+// Initialize Header Language
+// ==============================
+function initHeaderLang() {
+  const page = window.location.pathname.split("/").pop().toLowerCase();
+
+  let lang = 'pt'; // default
+  if(page.includes('en-us')) lang = 'en';
+  else if(page.includes('es-es')) lang = 'es';
+
+  // Update menu items only (logo is static)
+  document.querySelectorAll('.lang-text').forEach(el => {
+    const text = el.getAttribute(`data-${lang}`);
+    if(text) el.innerHTML = text;
+  });
+}
+
+// ==============================
+// Load partials
+// ==============================
+loadPartial('header-placeholder','partials/header.html');
+loadPartial('footer-placeholder','partials/footer.html');
