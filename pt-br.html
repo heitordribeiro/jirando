@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jirando</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <!-- Hero -->
+  <section id="hero">
+    <h1 class="hero-title">Jirando</h1>
+    <h5 style="color: var(--primary);">by HDR Soluções em TI</h5>
+    <h2 class="hero-subtitle lang pt active">Consultoria especializada em soluções Atlassian</h2>
+    <p class="lang pt active hero-desc">Transformamos a forma como sua equipe trabalha com soluções Atlassian</p>
+    <a href="#contact">Fale Conosco</a>
+  </section>
+
+  <!-- About, Services, Success, Contact Sections -->
+  <!-- Use the same content as your original HTML, keep .lang.pt active -->
+
+  <div id="footer-placeholder"></div>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    async function loadPartial(id, url) {
+      const res = await fetch(url);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
+    }
+    loadPartial('header-placeholder', 'partials/header.html');
+    loadPartial('footer-placeholder', 'partials/footer.html');
+  </script>
+</body>
+</html>
