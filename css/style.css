@@ -23,7 +23,7 @@ body {
   color: var(--text);
   line-height:1.6;
   scroll-behavior: smooth;
-  padding-top: var(--header-height); /* reserve space for fixed header */
+  padding-top: var(--header-height);
 }
 a { text-decoration:none; color:inherit; }
 img { max-width:100%; height:auto; }
@@ -36,7 +36,7 @@ header {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: #fff;
   padding: 15px 40px;
-  position: fixed; /* keeps header fixed on top */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -50,9 +50,6 @@ nav {
   align-items:center;
   flex-wrap:wrap;
 }
-/*.logo a { display:flex; align-items:center; gap:10px; cursor:pointer; }
-.logo img.site-logo { width:60px; transition:transform 0.3s; }
-.logo img.site-logo:hover { transform:scale(1.1); }*/
 
 /* ==============================
    Logo Styles (Fixed Header)
@@ -66,7 +63,7 @@ nav {
 }
 
 .logo img.site-logo {
-  width: 60px;           /* keep original logo size */
+  width: 60px;
   height: auto;
   transition: transform 0.3s;
 }
@@ -76,13 +73,12 @@ nav {
 }
 
 .logo span {
-  color: #fff;           /* make text visible */
-  font-weight: 700;      /* bold for visibility */
-  font-size: 1.5rem;     /* adjust text size to match logo */
-  line-height: 1;        /* vertical alignment */
-  white-space: nowrap;   /* prevent wrapping */
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  white-space: nowrap;
 }
-/**/
 
 .menu { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
 .menu a {
@@ -102,7 +98,7 @@ nav {
 #hero {
   background: linear-gradient(to right, #e0f0ff, #ffffff);
   text-align:center;
-  height: calc(100vh - var(--header-height)); /* adjust for fixed header */
+  height: calc(100vh - var(--header-height));
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -132,7 +128,7 @@ section {
   padding: 80px 20px; 
   max-width:1100px; 
   margin:auto; 
-  scroll-margin-top: var(--header-height); /* offset for fixed header */
+  scroll-margin-top: var(--header-height);
 }
 section h2 {
   color: var(--primary);
@@ -142,9 +138,7 @@ section h2 {
   position:relative;
 }
 section h2::after {
-  content:'';
-  display:block;
-  width:60px; height:3px;
+  content:''; display:block; width:60px; height:3px;
   background: var(--secondary);
   margin:10px auto 0;
   border-radius:2px;
@@ -194,6 +188,11 @@ section h2::after {
   transition:0.3s;
   position: relative;
   z-index:1;
+  cursor: pointer; /* hand cursor for Send button */
+}
+.btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
 
 /* ==============================
@@ -206,16 +205,6 @@ section h2::after {
   cursor:pointer; transition: all 0.3s; border:none;
   box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
-#contactForm .btn {
-  cursor: pointer; /* makes cursor a hand on hover */
-  transition: transform 0.3s, background 0.3s;
-}
-
-#contactForm .btn:hover {
-  transform: translateY(-3px); /* subtle hover lift */
-  background: linear-gradient(135deg, var(--secondary), var(--primary)); /* match hero/other buttons */
-}
-
 .icon-btn.whatsapp { background:#fff; }
 .icon-btn.whatsapp:hover {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -228,8 +217,7 @@ section h2::after {
 ============================== */
 .whatsapp-float {
   position: fixed;
-  width: 60px;
-  height: 60px;
+  width: 60px; height: 60px;
   bottom: 20px;
   right: 20px;
   background-color: #25D366;
@@ -243,15 +231,8 @@ section h2::after {
   transition: transform 0.3s;
 }
 
-.whatsapp-float:hover {
-  transform: scale(1.1);
-}
-
-.whatsapp-float img {
-  width: 35px;
-  height: 35px;
-}
-
+.whatsapp-float:hover { transform: scale(1.1); }
+.whatsapp-float img { width: 35px; height: 35px; }
 
 /* ==============================
    Footer
@@ -311,10 +292,7 @@ footer a { color: var(--accent); text-decoration: underline; }
    Mobile Styles
 ====================== */
 @media(max-width: 768px) {
-  nav {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-  }
+  nav { flex-wrap: nowrap; justify-content: space-between; }
   .menu {
     position: fixed;
     top: var(--header-height);
@@ -328,29 +306,13 @@ footer a { color: var(--accent); text-decoration: underline; }
     transition: left 0.3s ease;
     z-index: 999;
   }
-  .menu.active {
-    left: 0;
-  }
-  .menu a {
-    font-size: 1.2rem;
-    padding: 12px 0;
-  }
-  .lang-switch {
-    display: flex;
-    gap: 10px;
-  }
-  .hamburger {
-    display: flex;
-  }
+  .menu.active { left: 0; }
+  .menu a { font-size: 1.2rem; padding: 12px 0; }
+  .lang-switch { display: flex; gap: 10px; }
+  .hamburger { display: flex; }
 }
 
 /* Hamburger animation when active */
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
