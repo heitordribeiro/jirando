@@ -80,13 +80,31 @@ function sendWhatsApp() {
 // Redirect index.html to browser language
 // ==============================
 document.addEventListener('DOMContentLoaded', () => {
-  const path = window.location.pathname.split("/").pop().toLowerCase();
-  
-  if(path === '' || path === 'index.html') {
+  const page = window.location.pathname.split("/").pop().toLowerCase();
+  if(page === '' || page === 'index.html') {
     const lang = (navigator.language || navigator.userLanguage || 'pt').toLowerCase();
-    
     if(lang.startsWith('en')) window.location.replace('en-us.html');
     else if(lang.startsWith('es')) window.location.replace('es-es.html');
     else window.location.replace('pt-br.html');
   }
+});
+
+// ==============================
+// Load Header & Footer Partials
+// ==============================
+async function loadPartial(id, url){
+  try {
+    const res = await fetch(url);
+    if(!res.ok) throw new Error(`Failed to load ${url}`);
+    const html = await res.text();
+    document.getElementById(id).innerHTML = html;
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+// Load header and footer on every page
+document.addEventListener('DOMContentLoaded', () => {
+  loadPartial('header-placeholder', 'partials/header.html');
+  loadPartial('footer-placeholder', 'partials/footer.html');
 });
