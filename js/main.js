@@ -51,10 +51,10 @@ if(contactForm) {
     const message = document.getElementById('message').value;
 
     emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
-      from_name:name,
-      from_email:email,
-      message:message,
-      to_email:'test@test.com'
+      from_name: name,
+      from_email: email,
+      message: message,
+      to_email: 'test@test.com'
     }).then(()=> alert('Email enviado com sucesso!'))
       .catch(err => alert('Erro ao enviar email: '+err));
   });
@@ -73,27 +73,22 @@ function sendWhatsApp() {
 }
 
 // ==============================
-// Multi-Language Switching
+// Language Switching Functions
 // ==============================
 function setLang(lang) {
-  // Update active flags
-  document.querySelectorAll('.lang-switch img').forEach(img => img.style.opacity = 0.5);
-  const flagMap = { 'pt':'br.png','en':'us.png','es':'es.png' };
-  const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[lang]}']`);
-  if(activeFlag) activeFlag.style.opacity = 1;
-
-  // Update all elements with class "lang-text" using innerHTML to preserve bold tags
+  // Update menu text
   document.querySelectorAll('.lang-text').forEach(el => {
     const html = el.getAttribute(`data-${lang}`);
     if(html) el.innerHTML = html;
   });
 
-  // Optional: add active class to any elements with .lang class
-  document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.lang.'+lang).forEach(el => el.classList.add('active'));
+  // Update active flags
+  document.querySelectorAll('.lang-switch img').forEach(img => img.style.opacity = 0.5);
+  const flagMap = { 'pt':'br.png', 'en':'us.png', 'es':'es.png' };
+  const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[lang]}']`);
+  if(activeFlag) activeFlag.style.opacity = 1;
 }
 
-// Detect browser language on load
 function detectBrowserLang() {
   const lang = navigator.language || navigator.userLanguage;
   if(lang.startsWith('pt')) return 'pt';
@@ -102,19 +97,36 @@ function detectBrowserLang() {
   return 'pt';
 }
 
-// Set language on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', ()=>{
+// Initialize language switch after header loads
+function initLanguageSwitch() {
+  // Attach click handlers to flags
+  document.querySelectorAll('.lang-switch img').forEach(img => {
+    img.addEventListener('click', () => {
+      const lang = img.alt.startsWith('Português') ? 'pt' :
+                   img.alt.startsWith('English') ? 'en' : 'es';
+      setLang(lang);
+    });
+  });
+
+  // Detect browser language
   const browserLang = detectBrowserLang();
   setLang(browserLang);
-});
+}
 
 // ==============================
-// Load Partials (Header & Footer)
+// Load Header & Footer Partials
 // ==============================
-async function loadPartial(id,url){
+async function loadPartial(id, url){
   const res = await fetch(url);
   const html = await res.text();
   document.getElementById(id).innerHTML = html;
+
+  // Initialize language switch after header loads
+  if(id === 'header-placeholder') {
+    initLanguageSwitch();
+  }
 }
+
+// Load partials
 loadPartial('header-placeholder','partials/header.html');
 loadPartial('footer-placeholder','partials/footer.html');
