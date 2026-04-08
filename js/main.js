@@ -57,6 +57,16 @@ if(contactForm) {
   });
 }
 
+// ==============================
+// Contacts scroll down
+// ==============================
+document.getElementById('contactBtn').addEventListener('click', function() {
+    // Scroll the whole page to the bottom smoothly
+    window.scrollTo({ 
+        top: document.body.scrollHeight, 
+        behavior: 'smooth' 
+    });
+});
 
 // ==============================
 // WhatsApp Icon
