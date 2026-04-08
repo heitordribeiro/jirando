@@ -45,3 +45,13 @@ header {
   background: linear-gradient(135deg,var(--primary),var(--secondary));
   color: #fff;
 }
+
+.site-logo {
+  width: 40px;   /* smaller size */
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.site-logo:hover {
+  transform: scale(1.1);
+}
