@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Cache config -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <meta charset="UTF-8">
-    <title>Language Redirect</title>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        let userLang = navigator.language || navigator.userLanguage;
-        userLang = userLang.toLowerCase();
-
-        if (userLang.startsWith("pt")) {
-          window.location.href = "pt-br.html";
-        } else if (userLang.startsWith("es")) {
-          window.location.href = "es-es.html";
-        } else {
-          window.location.href = "en-us.html";
-        }
-      });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jirando - Atlassian Consulting</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <p>Redirecting based on your browser language...</p>
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="cases.html">Success Cases</a>
+      <a href="contact.html">Contact</a>
+      <!-- Language Switcher -->
+      <select id="lang-switch">
+        <option value="en">EN</option>
+        <option value="pt">PT</option>
+        <option value="es">ES</option>
+      </select>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Experts in Atlassian Tools</h1>
+    <p>Consulting, Implementation, Migration, DevOps & Process Optimization</p>
+    <img src="assets/img/jira.png" alt="Jira screenshot">
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Jirando Consulting</p>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/your-number" class="whatsapp-float">💬</a>
 </body>
 </html>

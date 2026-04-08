@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -156,7 +156,18 @@
       .card h3, .about-block h3 { font-size:1.3rem; }
       .card p, .about-block p { font-size:0.95rem; }
     }
-
+	
+	.btn{
+  margin-top:20px;
+  padding:15px 35px;
+  border-radius:50px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:600;
+  transition:.3s;
+  position:relative;
+  z-index:1;
+}
 	
 	
   </style>
@@ -267,22 +278,15 @@
 
 
   </div>
-</section>
+  <section id="contact">
 <!-- Contact -->
-<section id="contact">
+
   <h2>Contato</h2>
   <form id="contactForm">
     <input type="text" id="name" placeholder="Nome" required>
     <input type="email" id="email" placeholder="Email" required>
     <textarea id="message" rows="5" placeholder="Mensagem" required></textarea>
-    <div class="icon-buttons">
-      <button type="submit" class="icon-btn email">
-        <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email">
-      </button>
-      <button type="button" onclick="sendWhatsApp()" class="icon-btn whatsapp">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-      </button>
-    </div>
+  <button class="btn">Enviar</button>
   </form>
   <br>
 <p style="margin-top:10px; text-align:center; font-weight:bold;">
