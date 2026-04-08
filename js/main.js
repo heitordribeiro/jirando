@@ -73,57 +73,33 @@ function sendWhatsApp() {
 }
 
 // ==============================
-// Multi-Language Header Switching
+// Header Language Handling
 // ==============================
-const langPages = {
-  'pt': 'pt-br.html',
-  'en': 'en-us.html',
-  'es': 'es-es.html'
-};
+function initHeaderLanguage() {
+  const path = window.location.pathname.toLowerCase();
+  let lang = 'pt'; // default
 
-function setHeaderLang(lang) {
-  // Update header/menu text
+  if(path.includes('en-us.html')) lang = 'en';
+  else if(path.includes('es-es.html')) lang = 'es';
+  else {
+    // Fallback: detect browser language
+    const browserLang = navigator.language || navigator.userLanguage;
+    if(browserLang.startsWith('en')) lang = 'en';
+    else if(browserLang.startsWith('es')) lang = 'es';
+    else lang = 'pt';
+  }
+
+  // Update menu text
   document.querySelectorAll('.lang-text').forEach(el => {
-    const text = el.dataset[lang];
-    if(text) el.textContent = text;
+    const text = el.getAttribute(`data-${lang}`);
+    if(text) el.innerHTML = text;
   });
 
-  // Highlight active flag
+  // Update active flag
   document.querySelectorAll('.lang-switch img').forEach(img => img.style.opacity = 0.5);
-  const flagMap = { 'pt':'br.png','en':'us.png','es':'es.png' };
+  const flagMap = { 'pt':'br.png', 'en':'us.png', 'es':'es.png' };
   const activeFlag = document.querySelector(`.lang-switch img[src$='${flagMap[lang]}']`);
   if(activeFlag) activeFlag.style.opacity = 1;
-}
-
-function switchLang(lang) {
-  setHeaderLang(lang);           // update header immediately
-  const page = langPages[lang];  // navigate to corresponding HTML page
-  if(page) {
-    setTimeout(() => { window.location.href = page; }, 100);
-  }
-}
-
-function detectBrowserLang() {
-  const lang = navigator.language || navigator.userLanguage;
-  if(lang.startsWith('pt')) return 'pt';
-  if(lang.startsWith('en')) return 'en';
-  if(lang.startsWith('es')) return 'es';
-  return 'pt';
-}
-
-function initLanguageSwitch() {
-  // Attach click handlers to flags
-  document.querySelectorAll('.lang-switch img').forEach(img => {
-    img.addEventListener('click', () => {
-      const lang = img.alt.startsWith('Português') ? 'pt' :
-                   img.alt.startsWith('English') ? 'en' : 'es';
-      switchLang(lang);
-    });
-  });
-
-  // Detect browser language on first load
-  const browserLang = detectBrowserLang();
-  setHeaderLang(browserLang);
 }
 
 // ==============================
@@ -134,9 +110,9 @@ async function loadPartial(id, url){
   const html = await res.text();
   document.getElementById(id).innerHTML = html;
 
-  // Initialize language switch after header loads
+  // Initialize header language after header loads
   if(id === 'header-placeholder') {
-    initLanguageSwitch();
+    initHeaderLanguage();
   }
 }
 
