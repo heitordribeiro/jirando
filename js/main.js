@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if(page === '' || page === 'index.html') {
     const lang = navigator.language || navigator.userLanguage;
-    if(lang.startsWith('en')) window.location.href = 'en-us.html';
+    if(lang.startsWith('pt')) window.location.href = 'pt-br.html';
     else if(lang.startsWith('es')) window.location.href = 'es-es.html';
-    else window.location.href = 'pt-br.html'; // default
+    else window.location.href = 'en-us.html'; // default
   }
 });
 
