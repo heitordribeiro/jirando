@@ -50,9 +50,40 @@ nav {
   align-items:center;
   flex-wrap:wrap;
 }
-.logo a { display:flex; align-items:center; gap:10px; cursor:pointer; }
+/*.logo a { display:flex; align-items:center; gap:10px; cursor:pointer; }
 .logo img.site-logo { width:60px; transition:transform 0.3s; }
-.logo img.site-logo:hover { transform:scale(1.1); }
+.logo img.site-logo:hover { transform:scale(1.1); }*/
+
+/* ==============================
+   Logo Styles (Fixed Header)
+============================== */
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo img.site-logo {
+  width: 60px;           /* keep original logo size */
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.logo img.site-logo:hover {
+  transform: scale(1.1);
+}
+
+.logo span {
+  color: #fff;           /* make text visible */
+  font-weight: 700;      /* bold for visibility */
+  font-size: 1.5rem;     /* adjust text size to match logo */
+  line-height: 1;        /* vertical alignment */
+  white-space: nowrap;   /* prevent wrapping */
+}
+/**/
+
 .menu { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
 .menu a {
   color:#fff; font-weight:500; padding:5px 10px;
