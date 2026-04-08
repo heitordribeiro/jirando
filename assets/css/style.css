@@ -1,0 +1,47 @@
+:root {
+  --primary: #0047AB;
+  --secondary: #3A8DFF;
+  --accent: #FFC107;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f4f6fa;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  position: sticky;
+  top: 0;
+}
+
+/* Hero */
+#hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cards */
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Button */
+.btn {
+  padding: 15px 30px;
+  border-radius: 50px;
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+  color: #fff;
+}
