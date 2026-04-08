@@ -373,7 +373,7 @@ footer a { color: var(--accent); text-decoration: underline; }
 
 /* success color font */
 #success h4 {
-  font-size: 1.5rem; /* Set a similar font size to h3 (adjust as needed) */
+  font-size: 1.0rem; /* Set a similar font size to h3 (adjust as needed) */
   color: var(--primary); /* Assuming --primary is the blue color you were using */
   margin-top: 10px;
 }
