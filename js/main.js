@@ -19,23 +19,30 @@ function clearStorage() {
 emailjs.init('YOUR_PUBLIC_KEY');
 
 // ==============================
-// Show Footer Function (PC Only)
+// Show Footer Only on Desktop
 // ==============================
-function showFooter() {
+function updateFooterVisibility() {
   const footer = document.getElementById('footer');
   if (!footer) return;
 
-  if (window.innerWidth >= 768) { // Only for desktop
-    footer.style.display = 'block';
+  // Show footer only on desktop (>=768px) and when on the contact section
+  if (window.innerWidth >= 768) {
+    // Check if we're on the contact section/page
+    const contactSection = document.getElementById('contact');
+    if (contactSection && (window.location.hash === '#contact' || window.location.pathname.includes('contact'))) {
+      footer.classList.add('show-footer');  // Show footer on desktop
+    } else {
+      footer.classList.remove('show-footer');  // Hide footer if not on contact
+    }
   } else {
-    footer.style.display = 'none';
+    footer.classList.remove('show-footer');  // Always hide footer on mobile
   }
 }
 
 // ==============================
 // Smooth Scroll + Contact Button Scroll
 // ==============================
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
   const anchor = e.target.closest('a[href^="#"]');
   if (!anchor) return;
 
@@ -44,10 +51,15 @@ document.addEventListener('click', function(e) {
   const target = document.getElementById(targetId);
 
   if (targetId === 'contact') {
-    showFooter();
+    updateFooterVisibility();
+    // Scroll to contact section
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    // Also scroll to bottom to reveal footer on desktop
+    if (window.innerWidth >= 768) {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   } else if (target) {
+    // Normal smooth scroll for other anchors
     const header = document.querySelector('header');
     const headerHeight = header ? header.offsetHeight : 0;
     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
@@ -71,8 +83,8 @@ if(contactForm) {
       from_email: email,
       message: message,
       to_email: 'test@test.com'
-    }).then(()=> alert('Email enviado com sucesso!'))
-      .catch(err => alert('Erro ao enviar email: '+err));
+    }).then(() => alert('Email enviado com sucesso!'))
+      .catch(err => alert('Erro ao enviar email: ' + err));
   });
 }
 
@@ -119,19 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const lang = navigator.language || navigator.userLanguage;
     if(lang.startsWith('pt')) window.location.href = 'pt-br.html';
     else if(lang.startsWith('es')) window.location.href = 'es-es.html';
-    else window.location.href = 'en-us.html';
+    else window.location.href = 'en-us.html'; // default
   }
 
-  // Show footer for contact page only on PC
-  if (page.includes('contact')) showFooter();
-});
-
-// ==============================
-// Handle window resize
-// ==============================
-window.addEventListener('resize', () => {
-  const page = window.location.pathname.split("/").pop().toLowerCase();
-  if (page.includes('contact')) showFooter();
+  // Direct access to contact page shows footer
+  if (page.includes('contact')) {
+    updateFooterVisibility();
+  }
 });
 
 // ==============================
@@ -188,3 +194,24 @@ async function loadPartial(id, url){
 // ==============================
 loadPartial('header-placeholder','partials/header.html');
 loadPartial('footer-placeholder','partials/footer.html');
+
+// ==============================
+// Show Footer Only on Desktop
+// ==============================
+function updateFooterVisibility() {
+  const footer = document.getElementById('footer');
+  if (!footer) return;
+
+  // Show footer only on desktop (>=768px) and when on the contact section
+  if (window.innerWidth >= 768) {
+    // Check if we're on the contact section/page
+    const contactSection = document.getElementById('contact');
+    if (contactSection && (window.location.hash === '#contact' || window.location.pathname.includes('contact'))) {
+      footer.classList.add('show-footer');  // Show footer on desktop
+    } else {
+      footer.classList.remove('show-footer');  // Hide footer if not on contact
+    }
+  } else {
+    footer.classList.remove('show-footer');  // Always hide footer on mobile
+  }
+}

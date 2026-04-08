@@ -246,6 +246,17 @@ footer {
 }
 footer a { color: var(--accent); text-decoration: underline; }
 
+/* Footer hidden by default */
+#footer {
+  display: none;
+}
+
+/* Show footer only on desktop (>= 768px) */
+@media (min-width: 768px) {
+  #footer.show-footer {
+    display: block;
+  }
+}
 
 /* ==============================
    Responsiveness
