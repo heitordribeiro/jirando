@@ -277,3 +277,81 @@ footer a { color: var(--accent); text-decoration: underline; }
   .card h3, .about-block h3 { font-size:1.3rem; }
   .card p, .about-block p { font-size:0.95rem; }
 }
+/* ==============================
+   Hamburger Icon (Mobile)
+============================== */
+#hamburger {
+  display: none; /* hidden on desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+}
+
+#hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ==============================
+   Mobile Menu
+============================== */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.menu.active {
+  max-height: 500px; /* enough to show all items */
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #hamburger {
+    display: flex;
+  }
+
+  .menu {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  .menu a {
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .lang-switch {
+    margin-top: 10px;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+/* Optional: Hamburger animation when active */
+#hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+#hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+#hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
