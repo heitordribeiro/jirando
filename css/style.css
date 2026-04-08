@@ -206,26 +206,14 @@ section h2::after {
   cursor:pointer; transition: all 0.3s; border:none;
   box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
-.icon-btn {
-  cursor: pointer; /* ← makes cursor a hand */
+#contactForm .btn {
+  cursor: pointer; /* makes cursor a hand on hover */
+  transition: transform 0.3s, background 0.3s;
 }
 
-.icon-btn img {
-  width: 32px;
-  height: 32px;
-  transition: transform 0.3s;
-}
-
-.icon-btn.email {
-  background: #fff;
-}
-
-.icon-btn.email:hover {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-}
-
-.icon-btn.email:hover img {
-  filter: brightness(0) invert(1);
+#contactForm .btn:hover {
+  transform: translateY(-3px); /* subtle hover lift */
+  background: linear-gradient(135deg, var(--secondary), var(--primary)); /* match hero/other buttons */
 }
 
 .icon-btn.whatsapp { background:#fff; }
