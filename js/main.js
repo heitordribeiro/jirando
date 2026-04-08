@@ -19,7 +19,15 @@ function clearStorage() {
 emailjs.init('YOUR_PUBLIC_KEY');
 
 // ==============================
-// Smooth Scroll for Anchors + Contact Button Scroll
+// Show Footer Function
+// ==============================
+function showFooter() {
+  const footer = document.getElementById('footer');
+  if (footer) footer.style.display = 'block';
+}
+
+// ==============================
+// Smooth Scroll + Contact Button Scroll
 // ==============================
 document.addEventListener('click', function(e) {
   const anchor = e.target.closest('a[href^="#"]');
@@ -30,15 +38,11 @@ document.addEventListener('click', function(e) {
   const target = document.getElementById(targetId);
 
   if (targetId === 'contact') {
-    // Scroll to bottom of page smoothly
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-
-    // Show footer
-    const footer = document.getElementById('footer');
-    if (footer) footer.style.display = 'block';
-
-    // Optionally focus the contact section
+    showFooter();
+    // Scroll to contact section
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Also scroll to bottom to reveal footer
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   } else if (target) {
     // Normal smooth scroll for other anchors
     const header = document.querySelector('header');
@@ -73,11 +77,11 @@ if(contactForm) {
 // WhatsApp Icon Float
 // ==============================
 const whatsappIcon = document.getElementById('whatsappIcon');
-const footer = document.getElementById('footer');
+const footerEl = document.getElementById('footer');
 
 window.addEventListener('scroll', () => {
-  if (!whatsappIcon || !footer) return;
-  const footerRect = footer.getBoundingClientRect();
+  if (!whatsappIcon || !footerEl) return;
+  const footerRect = footerEl.getBoundingClientRect();
   const windowHeight = window.innerHeight;
 
   if (footerRect.top < windowHeight) {
@@ -114,6 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     else if(lang.startsWith('es')) window.location.href = 'es-es.html';
     else window.location.href = 'en-us.html';
   }
+
+  // Direct access to contact page shows footer
+  if (page.includes('contact')) showFooter();
 });
 
 // ==============================
@@ -166,17 +173,7 @@ async function loadPartial(id, url){
 }
 
 // ==============================
-// Show Footer on Contact Page
-// ==============================
-window.addEventListener("load", function() {
-  if (window.location.pathname === '/session-contact') {
-    const footer = document.querySelector('footer');
-    if (footer) footer.style.display = 'block';
-  }
-});
-
-// ==============================
-// Load partials
+// Load Partials
 // ==============================
 loadPartial('header-placeholder','partials/header.html');
 loadPartial('footer-placeholder','partials/footer.html');
