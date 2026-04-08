@@ -378,6 +378,8 @@ footer a { color: var(--accent); text-decoration: underline; }
   margin-top: 10px;
 }
 
+/*
 #success h4:hover {
   color: var(--primary); /* Optional: change color when hovered */
 }
+*/
