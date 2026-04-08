@@ -179,6 +179,13 @@ async function loadPartial(id, url){
   }
 }
 
+// Detect when the user navigates to the contact page
+window.addEventListener("load", function() {
+  if (window.location.pathname === '/session-contact') {
+    document.querySelector('footer').style.display = 'block';
+  }
+});
+
 // ==============================
 // Load partials
 // ==============================
