@@ -246,6 +246,12 @@ footer {
 }
 footer a { color: var(--accent); text-decoration: underline; }
 
+/* Make the contact section scroll to fully show footer */
+#contact {
+  padding-bottom: 150px; /* space for footer visibility */
+  scroll-margin-bottom: 80px; /* space to offset fixed header */
+}
+
 /* ==============================
    Responsiveness
 ============================== */
