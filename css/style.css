@@ -252,6 +252,7 @@ footer a { color: var(--accent); text-decoration: underline; }
   scroll-margin-bottom: 80px; /* space to offset fixed header */
 }
 
+
 /* ==============================
    Responsiveness
 ============================== */
