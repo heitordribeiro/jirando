@@ -19,11 +19,17 @@ function clearStorage() {
 emailjs.init('YOUR_PUBLIC_KEY');
 
 // ==============================
-// Show Footer Function
+// Show Footer Function (PC Only)
 // ==============================
 function showFooter() {
   const footer = document.getElementById('footer');
-  if (footer) footer.style.display = 'block';
+  if (!footer) return;
+
+  if (window.innerWidth >= 768) { // Only for desktop
+    footer.style.display = 'block';
+  } else {
+    footer.style.display = 'none';
+  }
 }
 
 // ==============================
@@ -39,12 +45,9 @@ document.addEventListener('click', function(e) {
 
   if (targetId === 'contact') {
     showFooter();
-    // Scroll to contact section
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Also scroll to bottom to reveal footer
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   } else if (target) {
-    // Normal smooth scroll for other anchors
     const header = document.querySelector('header');
     const headerHeight = header ? header.offsetHeight : 0;
     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
@@ -119,7 +122,15 @@ document.addEventListener('DOMContentLoaded', () => {
     else window.location.href = 'en-us.html';
   }
 
-  // Direct access to contact page shows footer
+  // Show footer for contact page only on PC
+  if (page.includes('contact')) showFooter();
+});
+
+// ==============================
+// Handle window resize
+// ==============================
+window.addEventListener('resize', () => {
+  const page = window.location.pathname.split("/").pop().toLowerCase();
   if (page.includes('contact')) showFooter();
 });
 
