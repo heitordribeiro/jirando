@@ -1,12 +1,23 @@
 /* ==============================
-   Header & Navigation Fix
+   Header & Navigation - Responsive Fix
 ============================== */
+
+/* Base header */
+header {
+  width: 100%;
+  background: #333; /* Set your header color */
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+/* Navigation container */
 header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  height: 100%;
+  width: 100%;
+  gap: 15px;
 }
 
 /* Logo */
@@ -28,6 +39,7 @@ header nav {
   width: 60px;
   height: auto;
   transition: transform 0.3s;
+  transform-origin: center;
 }
 
 .logo img.site-logo:hover {
@@ -47,8 +59,7 @@ header nav {
   display: flex;
   align-items: center;
   gap: 25px;
-  flex: 1; /* take remaining space */
-  justify-content: center; /* center menu links */
+  flex-wrap: wrap;
 }
 
 .menu a {
@@ -81,10 +92,15 @@ header nav {
 
 .lang-switch img:hover {
   transform: scale(1.2);
+  transform-origin: center;
 }
 
-/* Responsive tweaks */
-@media(max-width:768px) {
+/* ==============================
+   Responsive Adjustments
+============================== */
+
+/* Medium screens */
+@media (max-width: 768px) {
   header nav {
     flex-direction: column;
     align-items: flex-start;
@@ -92,8 +108,8 @@ header nav {
   }
 
   .menu {
+    width: 100%;
     justify-content: flex-start;
-    flex-wrap: wrap;
   }
 
   .lang-switch {
@@ -101,9 +117,23 @@ header nav {
   }
 }
 
-@media(max-width:480px) {
-  .logo img.site-logo { width: 50px; }
-  .logo span { font-size: 1.2rem; }
-  .menu a { font-size: 0.9rem; padding: 4px 8px; }
-  .lang-switch img { width: 24px; height: 16px; }
+/* Small screens */
+@media (max-width: 480px) {
+  .logo img.site-logo {
+    width: 50px;
+  }
+
+  .logo span {
+    font-size: 1.2rem;
+  }
+
+  .menu a {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+
+  .lang-switch img {
+    width: 24px;
+    height: 16px;
+  }
 }
