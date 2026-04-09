@@ -1,25 +1,31 @@
-// Retrieving passowrds from env
-const dbPassword = process.env.DB_PASSWORD; // 
-
-// Initialize EmailJS
-(function(){
-  emailjs.init("cF-aWnWqc8T5iFeZ2"); // Replace with your EmailJS user ID
-})();
-
-// Get the form element
 const form = document.getElementById('contactForm');
 
-// Attach submit event listener
-form.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent page refresh
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-  emailjs.sendForm('service_d4s4v4q', 'template_quek7dx', form) // Replace with your EmailJS serviuce and template IDs
-    .then(() => {
+  const formData = {
+    name: form.name.value,
+    email: form.email.value,
+    message: form.message.value
+  };
+
+  try {
+    const res = await fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await res.json();
+    if (data.success) {
       alert('Email sent successfully!');
       form.reset();
-    })
-    .catch((error) => {
-      console.error('Failed to send email:', error);
-      alert('Failed to send email. Check console for details.');
-    });
+    } else {
+      console.error(data.error);
+      alert('Failed to send email. Check console.');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Error sending email.');
+  }
 });
