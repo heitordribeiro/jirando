@@ -362,11 +362,8 @@ footer {
   color: #fff;
   text-align: center;
   border-radius: 20px 20px 0 0;
-
-  /* Reduce overall padding */
-  padding: 10px 20px;   /* top/bottom 10px, left/right 20px */
-
-  margin-top: 0;         /* ensure no extra top margin */
+  padding: 15px 20px;
+  margin-top: 40px;
 }
 footer a { color: var(--accent); text-decoration: underline; }
 
