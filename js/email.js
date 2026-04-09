@@ -1,27 +1,25 @@
+// Retrieving passowrds from env
+const dbPassword = process.env.DB_PASSWORD; // 
+
+// Initialize EmailJS
+(function(){
+  emailjs.init("cF-aWnWqc8T5iFeZ2"); // Replace with your EmailJS user ID
+})();
+
+// Get the form element
 const form = document.getElementById('contactForm');
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
+// Attach submit event listener
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent page refresh
 
-  const formData = Object.fromEntries(new FormData(form).entries());
-
-  try {
-    const response = await fetch('http://localhost:3000/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
-
-    if (response.ok) {
+  emailjs.sendForm('service_d4s4v4q', 'template_quek7dx', form) // Replace with your EmailJS serviuce and template IDs
+    .then(() => {
       alert('Email sent successfully!');
       form.reset();
-    } else {
-      const errorData = await response.json();
-      console.error('Failed to send email:', errorData.error);
-      alert('Failed to send email. Check console.');
-    }
-  } catch (err) {
-    console.error('Network error:', err);
-    alert('Network error. Check console.');
-  }
+    })
+    .catch((error) => {
+      console.error('Failed to send email:', error);
+      alert('Failed to send email. Check console for details.');
+    });
 });

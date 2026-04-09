@@ -1,3 +1,6 @@
+const cors = require('cors');
+app.use(cors()); // allow requests from any origin
+
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
