@@ -313,31 +313,19 @@ footer a { color: var(--accent); text-decoration: underline; }
   .card h3, .about-block h3 { font-size:1.3rem; }
   .card p, .about-block p { font-size:0.95rem; }
 }
-/* Hamburger Menu */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: #fff;
-  border-radius: 2px;
-  transition: all 0.3s;
-}
 
-/* Menu default for desktop */
-.menu {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  flex-wrap: wrap;
+/* Mobile: Center section for contact and about */
+@media (max-width: 768px) {
+  #contact, #about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Make the section take at least the full viewport height */
+  }
 }
 
 /* ======================
-   Mobile Styles
+   Mobile Menu
 ====================== */
 @media(max-width: 768px) {
   nav { flex-wrap: nowrap; justify-content: space-between; }
@@ -364,90 +352,3 @@ footer a { color: var(--accent); text-decoration: underline; }
 .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-
-/* Img full card - clients */
-#clients .card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-#clients .card img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* or cover */
-  opacity: 0.8;
-}
-
-/* success session adjustment size */
-#success {
-  height: auto; /* Remove 100vh */
-  padding: 20px;
-}
-
-#success .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  gap: 20px;
-  justify-items: center;
-}
-
-#success .card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center;
-}
-
-#success img {
-  width: 80%; /* Make the images smaller (you can adjust this to your liking) */
-  height: auto;
-  margin-bottom: 10px;
-}
-
-@media screen and (max-width: 768px) {
-  #success .grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #success .grid {
-    grid-template-columns: 1fr; /* 1 column for mobile */
-  }
-}
-
-/* success color font */
-#success h4 {
-  font-size: 1.0rem; /* Font size*/
-  color: var(--primary); /* Assuming --primary is the blue color you were using */
-  margin-top: 10px;
-}
-
-
-/* Response message styles */
-.response-message {
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    text-align: center;
-    width: 300px;
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.response-message.success {
-    background-color: #4CAF50; /* Green */
-}
-
-.response-message.error {
-    background-color: #F44336; /* Red */
-}
-
