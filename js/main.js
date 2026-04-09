@@ -91,10 +91,12 @@ if(contactForm) {
             alert('Email enviado com sucesso!');
         }).catch(err => {
             // Log the error to the console to inspect it
-            console.error('Error sending email:', err);
+            //console.error('Error sending email:', err);
+        console.error('Erro:', error);  // Imprime o erro no console
+        alert('Erro ao enviar o email. Detalhes no console.');
 
             // Display the error message or detailed error properties
-            alert('Erro ao enviar email: ' + (err.message || err));
+            //alert('Erro ao enviar email: ' + (err.message || err));
         });
     });
 }
