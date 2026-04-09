@@ -173,45 +173,76 @@ section h2::after {
    Contact Form & Buttons
 ============================== */
 
+/* Contact Section Fit on Screen */
 #contact {
-  min-height: 100vh;         /* fill full viewport height */
+  min-height: 100vh;          /* full viewport height */
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* vertically center form */
-  padding: 10px 20px;        /* small padding for breathing room */
-  margin-bottom: 0;          /* remove extra space before footer */
+  justify-content: center;    /* vertically center the form */
+  align-items: center;        /* center horizontally */
+  padding: 20px 15px;         /* small padding around section */
+  margin: 0;                  /* remove extra spacing */
   box-sizing: border-box;
 }
 
 #contact form {
-  max-width: 450px;           /* slightly smaller width */
-  margin: 0 auto;
-  padding: 15px;              /* reduced padding */
-  gap: 10px;                  /* smaller gap between fields */
+  width: 100%;
+  max-width: 450px;            /* compact width */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;                   /* spacing between inputs/buttons */
+  padding: 20px;
   background-color: #f8f8f8;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  min-height: auto;           /* don't force tall height */
+  box-sizing: border-box;
 }
 
 #contact input,
 #contact textarea {
-  padding: 10px;             /* smaller inputs */
-  font-size: 0.9rem;         /* smaller font to fit better */
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  border-color: var(--primary);
+  outline: none;
 }
 
 #contact .btn {
-  padding: 10px 25px;        /* smaller button */
-  font-size: 0.9rem;
+  padding: 10px 25px;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  align-self: center;
+  transition: transform 0.3s, background 0.3s;
+}
+
+#contact .btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
 
 .contact-info {
-  margin-top: 10px;           /* reduce spacing below form */
-  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #333;
 }
 
 footer {
-  margin-top: 0;              /* ensure footer hugs contact section */
+  margin-top: 0;
   padding-top: 20px;
 }
 
