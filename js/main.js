@@ -13,6 +13,8 @@ function clearStorage() {
   sessionStorage.clear();
 }
 
+
+
 // ==============================
 // Show Footer Only on Desktop
 // ==============================
@@ -62,39 +64,41 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// ==============================
-// Select the Contact and About buttons
-// ==============================
-const contactButton = document.querySelector('#contact-button');  // Replace with your contact button selector
-const aboutButton = document.querySelector('#about-button');      // Replace with your about button selector
-
-// Add event listeners for the buttons
-contactButton.addEventListener('click', () => {
-  // Scroll to contact section
-  const contactSection = document.querySelector('#contact');
-  scrollToSection(contactSection);
-});
-
-aboutButton.addEventListener('click', () => {
-  // Scroll to about section
-  const aboutSection = document.querySelector('#about');
-  scrollToSection(aboutSection);
-});
+/*
 
 // ==============================
-// Function to scroll and center section
+// Contact Form Submission
 // ==============================
-function scrollToSection(section) {
-  if (window.innerWidth <= 768) {  // Only for mobile (<=768px)
-    window.scrollTo({
-      top: section.offsetTop - (window.innerHeight / 2) + (section.offsetHeight / 2), // Center the section
-      behavior: 'smooth'
+const contactForm = document.getElementById('contactForm');
+
+// Initialize EmailJS with your user ID
+emailjs.init('cF-aWnWqc8T5iFeZ2');
+
+if(contactForm) {
+    contactForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        emailjs.send('service_d4s4v4q', 'template_quek7dx', {
+            from_name: name,
+            from_email: email,
+            message: message,
+            to_email: 'contactfromsite@jirando.com'
+        }).then(() => {
+            alert('Email enviado com sucesso!');
+        }).catch(err => {
+            // Log the error to the console to inspect it
+            console.error('Error sending email:', err);
+
+            // Display the error message or detailed error properties
+            alert('Erro ao enviar email: ' + (err.message || err));
+        });
     });
-  } else {
-    // Just scroll normally on larger screens
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
 }
+
+*/
 
 // ==============================
 // WhatsApp Icon Float
