@@ -67,39 +67,6 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// ==============================
-// Contact Form Submission
-// ==============================
-const contactForm = document.getElementById('contactForm');
-
-// Initialize EmailJS with your user ID
-emailjs.init('cF-aWnWqc8T5iFeZ2'); // Replace with your actual EmailJS user ID
-
-if(contactForm) {
-    contactForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-
-        emailjs.send('service_d4s4v4q', 'template_quek7dx', {
-            from_name: name,
-            from_email: email,
-            message: message,
-            to_email: 'contactfromsite@jirando.com'
-        }).then(() => {
-            alert('Email enviado com sucesso!');
-        }).catch(err => {
-            // Log the error to the console to inspect it
-            //console.error('Error sending email:', err);
-         console.error('Erro ao enviar o email:', JSON.stringify(error)); 
-        alert('Erro ao enviar o email. Verifique o console para detalhes.');
-
-            // Display the error message or detailed error properties
-            //alert('Erro ao enviar email: ' + (err.message || err));
-        });
-    });
-}
 
 // ==============================
 // WhatsApp Icon Float
