@@ -14,11 +14,6 @@ function clearStorage() {
 }
 
 // ==============================
-// EmailJS Initialization
-// ==============================
-//emailjs.init('cF-aWnWqc8T5iFeZ2');
-
-// ==============================
 // Show Footer Only on Desktop
 // ==============================
 function updateFooterVisibility() {

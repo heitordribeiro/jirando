@@ -172,6 +172,10 @@ section h2::after {
    Contact Form & Buttons
 ============================== */
 
+/* ==============================
+   Contact Form & Buttons
+============================== */
+
 #contact form {
   max-width: 600px; /* Slightly wider form */
   margin: 0 auto;
@@ -222,7 +226,7 @@ section h2::after {
   background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
 
-#contact p {
+.contact-info {
   margin-top: 25px;
   text-align: center;
   font-weight: bold;
