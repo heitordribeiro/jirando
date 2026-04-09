@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmailJS Test Form</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS with your user ID
+    (function(){
+      emailjs.init("cF-aWnWqc8T5iFeZ2"); // Replace with your EmailJS user ID
+    })();
+
+    function sendEmail(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const form = document.getElementById('contact-form');
+
+      emailjs.sendForm('service_d4s4v4q', 'template_quek7dx', form)
+        .then(() => {
+          alert('Email sent successfully!');
+          form.reset();
+        }, (error) => {
+          console.error('Failed to send email:', error);
+          alert('Failed to send email. Check console for details.');
+        });
+    }
+  </script>
+</head>
+<body>
+  <h2>Test EmailJS Form</h2>
+  <form id="contact-form" onsubmit="sendEmail(event)">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="user_name" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="user_email" required><br><br>
+
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" required></textarea><br><br>
+
+    <button type="submit">Send Email</button>
+  </form>
+</body>
+</html>
