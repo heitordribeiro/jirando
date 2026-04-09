@@ -256,10 +256,22 @@ html, body {
   color: #333;
 }
 
-/* Footer spacing */
+/* Remove extra space at bottom of contact section */
+#contact {
+  padding-bottom: 10px;  /* reduce padding at the bottom */
+  margin-bottom: 0;      /* remove any bottom margin */
+}
+
+/* Reduce spacing of last elements inside contact */
+#contact .contact-info,
+#contact form {
+  margin-bottom: 0;      /* remove any default margin */
+}
+
+/* Footer */
 footer {
-  margin-top: 0;
-  padding-top: 10px;
+  margin-top: 0;          /* remove top margin */
+  padding-top: 15px;      /* small padding for breathing room */
 }
 
 /* Button */
