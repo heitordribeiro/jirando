@@ -173,47 +173,47 @@ section h2::after {
    Contact Form & Buttons
 ============================== */
 
-#contact form {
-  max-width: 500px; /* Slightly wider form */
-  min-height: 20vh; /* full viewport height */
-  margin: 0 auto;
+#contact {
+  min-height: 100vh;         /* fill full viewport height */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* center form vertically */
-  gap: 15px; /* Increased gap between form elements */
-  padding: 15px;
-  background-color: #f8f8f8; /* Light background color for contrast */
-  border-radius: 10px; /* Rounded corners for the form */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
-  padding-bottom: 15px; /* reduce padding at the bottom */
-  margin-bottom: 0;     /* remove extra margin if any */
+  justify-content: center;   /* vertically center form */
+  padding: 10px 20px;        /* small padding for breathing room */
+  margin-bottom: 0;          /* remove extra space before footer */
+  box-sizing: border-box;
+}
+
+#contact form {
+  max-width: 450px;           /* slightly smaller width */
+  margin: 0 auto;
+  padding: 15px;              /* reduced padding */
+  gap: 10px;                  /* smaller gap between fields */
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  min-height: auto;           /* don't force tall height */
 }
 
 #contact input,
 #contact textarea {
-  padding: 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  transition: border 0.3s ease;
-  width: 100%; /* Ensure inputs fill container */
-  box-sizing: border-box; /* Prevents padding from affecting the width */
+  padding: 10px;             /* smaller inputs */
+  font-size: 0.9rem;         /* smaller font to fit better */
 }
 
-#contact input:focus,
-#contact textarea:focus {
-  border-color: var(--primary);
-  outline: none;
+#contact .btn {
+  padding: 10px 25px;        /* smaller button */
+  font-size: 0.9rem;
 }
 
 .contact-info {
-  margin-top: 20px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #333; /* Slightly darker text for the contact info */
+  margin-top: 10px;           /* reduce spacing below form */
+  font-size: 0.9rem;
 }
 
+footer {
+  margin-top: 0;              /* ensure footer hugs contact section */
+  padding-top: 20px;
+}
 
 .btn {
   margin-top: 15px;
