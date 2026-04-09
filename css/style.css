@@ -175,7 +175,7 @@ section h2::after {
 
 #contact form {
   max-width: 600px; /* Slightly wider form */
-  min-height: 100vh; /* full viewport height */
+  min-height: 50vh; /* full viewport height */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
