@@ -180,27 +180,16 @@ function updateFooterVisibility() {
   const footer = document.getElementById('footer');
   if (!footer) return;
 
-// Show footer only on desktop (>=768px) and when on the contact section
-if (window.innerWidth >= 768) {
-  // Check if we're on the contact section/page
-  const contactSection = document.getElementById('contact');
-  if (contactSection && (window.location.hash === '#contact' || window.location.pathname.includes('contact'))) {
-    footer.classList.add('show-footer');  // Show footer on desktop
+  // Show footer only on desktop (>=768px) and when on the contact section
+  if (window.innerWidth >= 768) {
+    // Check if we're on the contact section/page
+    const contactSection = document.getElementById('contact');
+    if (contactSection && (window.location.hash === '#contact' || window.location.pathname.includes('contact'))) {
+      footer.classList.add('show-footer');  // Show footer on desktop
+    } else {
+      footer.classList.remove('show-footer');  // Hide footer if not on contact
+    }
   } else {
-    footer.classList.remove('show-footer');  // Hide footer if not on contact
-  }
-} else {
-  footer.classList.remove('show-footer');  // Always hide footer on mobile
-
-  // ADD THIS BLOCK (mobile centering condition)
-  const contactSection = document.getElementById('contact');
-  if (contactSection && window.location.hash === '#contact') {
-    const y = contactSection.getBoundingClientRect().top + window.pageYOffset;
-    const offset = Math.max(0, (window.innerHeight - contactSection.offsetHeight) / 2);
-
-    window.scrollTo({
-      top: y - offset,
-      behavior: 'smooth'
-    });
+    footer.classList.remove('show-footer');  // Always hide footer on mobile
   }
 }
