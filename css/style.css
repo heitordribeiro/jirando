@@ -179,8 +179,8 @@ section h2::after {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-   justify-content: center; /* center form vertically */
-  gap: 20px; /* Increased gap between form elements */
+  justify-content: center; /* center form vertically */
+  gap: 15px; /* Increased gap between form elements */
   padding: 20px;
   background-color: #f8f8f8; /* Light background color for contrast */
   border-radius: 10px; /* Rounded corners for the form */
