@@ -185,7 +185,7 @@ section h2::after {
   background-color: #f8f8f8; /* Light background color for contrast */
   border-radius: 10px; /* Rounded corners for the form */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
-  padding-bottom: 20px; /* reduce padding at the bottom */
+  padding-bottom: 15px; /* reduce padding at the bottom */
   margin-bottom: 0;     /* remove extra margin if any */
 }
 
@@ -204,6 +204,14 @@ section h2::after {
 #contact textarea:focus {
   border-color: var(--primary);
   outline: none;
+}
+
+.contact-info {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333; /* Slightly darker text for the contact info */
 }
 
 
@@ -228,13 +236,6 @@ section h2::after {
   background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
 
-.contact-info {
-  margin-top: 25px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #333; /* Slightly darker text for the contact info */
-}
 
 /* ==============================
    Icon Buttons
@@ -285,7 +286,7 @@ footer {
   padding:30px 20px;
   border-radius:20px 20px 0 0;
   margin-top: 0;         /* remove any top margin from footer */
-  padding-top: 20px;     /* optional: small padding for breathing room */
+  padding-top: 15px;     /* optional: small padding for breathing room */
 
 
 }
