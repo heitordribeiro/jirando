@@ -1,12 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const emailjs = require('emailjs-com'); // or server-side compatible version
+const emailjs = require('emailjs-com'); // server-compatible
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serve static files from the public folder
+app.use(express.static('../public'));
+
+// Parse JSON and form data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public')); // serve your HTML/JS files
 
 // POST endpoint to send email
 app.post('/send-email', async (req, res) => {
@@ -22,9 +27,10 @@ app.post('/send-email', async (req, res) => {
     );
     res.json({ success: true });
   } catch (err) {
-    console.error(err);
+    console.error('EmailJS Error:', err);
     res.status(500).json({ error: err.toString() });
   }
 });
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+// Start server
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

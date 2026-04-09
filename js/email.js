@@ -1,14 +1,12 @@
-// Get the form element
 const form = document.getElementById('contactForm');
 
 form.addEventListener('submit', async (event) => {
-  event.preventDefault(); // prevent page refresh
+  event.preventDefault();
 
-  // Get form data as JSON
   const formData = Object.fromEntries(new FormData(form).entries());
 
   try {
-    const response = await fetch('/send-email', {
+    const response = await fetch('http://localhost:3000/send-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
