@@ -64,6 +64,8 @@ document.addEventListener('click', function (e) {
   }
 });
 
+/*
+
 // ==============================
 // Contact Form Submission
 // ==============================
@@ -95,6 +97,8 @@ if(contactForm) {
         });
     });
 }
+
+*/
 
 // ==============================
 // WhatsApp Icon Float
