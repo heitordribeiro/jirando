@@ -1,5 +1,28 @@
 {
   "dependencies": {
-    "@emailjs/browser": "^4.4.1"
-  }
+    "@emailjs/browser": "^4.4.1",
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.1",
+    "emailjs-com": "^3.2.0",
+    "express": "^5.2.1"
+  },
+  "name": "jirando",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heitordribeiro/jirando.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/heitordribeiro/jirando/issues"
+  },
+  "homepage": "https://github.com/heitordribeiro/jirando#readme"
 }
