@@ -17,7 +17,7 @@
     <div style="text-align:center; padding: 100px 20px;">
       <h1 class="hero-title">Jirando</h1>
       <h5 style="color: var(--primary);">por HDR Soluções em TI</h5>
-      <br>
+      
       <h2 class="lang pt active">Consultoria Especializada em Soluções Atlassian</h2>
       <p class="lang pt active hero-desc">
         Transformamos a forma como sua equipe trabalha com soluções Atlassian.
@@ -53,7 +53,7 @@
       </div>
     </div>
   </section>
-<br><br><br><br>
+
   <!-- Services Section -->
   <section id="services">
     <h2 class="lang pt active">Serviços e Tecnologias</h2>
@@ -117,6 +117,9 @@
     </div>
   </section>
 
+   </form>
+    <p style="margin-top:20px; text-align:center; font-weight:bold;">
+    </p>
     <!-- Clients Section -->
   <section id="clients">
     <h2 class="lang en active">Nossos Clientes</h2>
@@ -141,23 +144,28 @@
     <p style="margin-top:35px; text-align:center; font-weight:bold;">
     </p>
 
-  <!-- Contact Section -->
-  <section id="contact" style="position:relative;">
-    <h2 class="lang pt active">Contato</h2>
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Nome" required>
-      <input type="email" id="email" placeholder="E-mail" required>
-      <textarea id="message" rows="5" placeholder="Mensagem" required></textarea>
-       <!-- Send Button with type="submit" -->
-    <button type="submit" class="btn">Send</button>
-    </form>
+<!-- Contact Section -->
+<section id="contact" style="position:relative;">
+  <h2 class="lang en active">Contact</h2>
+
+  <!-- Contact Form -->
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Nome" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <textarea id="message" rows="5" placeholder="Mensagem" required></textarea>
+    
+    <!-- Send Button with type="submit" -->
+    <button type="submit" class="btn">Enviar</button>
+  </form>
+
  <!-- Mail and phone--> 
      <p style="margin-top:20px; text-align:center; font-weight:bold;">
-      Phone: +55 (31) 991400841
+      Telefone: +55 (31) 991400841
     </p>
      <p class="email-container">
       Email: <a href="mailto:contato@jirando.com" class="cool-blue-link">contato@jirando.com</a>
     </p>
+
   <!-- WhatsApp Floating Icon -->
   <a href="https://wa.me/5531991400841" target="_blank" class="whatsapp-float">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
