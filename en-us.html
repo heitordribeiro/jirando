@@ -150,12 +150,19 @@
 <!-- Contact Section -->
 <section id="contact" style="position:relative;">
   <h2 class="lang en active">Contact</h2>
+  
+  <!-- Contact Form -->
   <form id="contactForm">
     <input type="text" id="name" placeholder="Name" required>
     <input type="email" id="email" placeholder="Email" required>
     <textarea id="message" rows="5" placeholder="Message" required></textarea>
-    <button class="btn">Send</button>
+    
+    <!-- Send Button with type="submit" -->
+    <button type="submit" class="btn">Send</button>
   </form>
+
+  <!-- Success/Error Message -->
+  <div id="responseMessage" style="display:none;"></div>
 
   <p style="margin-top:25px; text-align:center; font-weight:bold;">
     Phone: +55 (31) 991400841

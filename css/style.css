@@ -429,3 +429,28 @@ footer a { color: var(--accent); text-decoration: underline; }
   margin-top: 10px;
 }
 
+
+/* Response message styles */
+.response-message {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    width: 300px;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.response-message.success {
+    background-color: #4CAF50; /* Green */
+}
+
+.response-message.error {
+    background-color: #F44336; /* Red */
+}
+
