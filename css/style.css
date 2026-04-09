@@ -173,16 +173,22 @@ section h2::after {
    Contact Form & Buttons
 ============================== */
 
-/* Contact Section: full screen fit */
+/* Ensure the body and html take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Contact Section: full viewport */
 #contact {
   display: flex;
   flex-direction: column;
   justify-content: center;   /* vertical center */
   align-items: center;       /* horizontal center */
-  min-height: 100vh;         /* full viewport height */
-  padding: 10px 15px;
-  margin: 0;
+  min-height: 100vh;         /* full screen height */
+  padding: 0 15px;
   box-sizing: border-box;
+  position: relative;
 }
 
 /* Form container */
@@ -198,9 +204,9 @@ section h2::after {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   box-sizing: border-box;
 
-  /* Make form flexible to fit viewport height */
-  max-height: 80vh;           /* prevent form from exceeding screen */
-  overflow-y: auto;           /* scroll inside if too tall */
+  /* make form flexible for viewport */
+  max-height: calc(100vh - 60px); /* leave space for contact info & footer */
+  overflow-y: auto;               /* scroll if content too tall */
 }
 
 /* Inputs and textarea */
@@ -219,6 +225,41 @@ section h2::after {
 #contact textarea:focus {
   border-color: var(--primary);
   outline: none;
+}
+
+/* Button */
+#contact .btn {
+  padding: 10px 25px;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  align-self: center;
+  transition: transform 0.3s, background 0.3s;
+}
+
+#contact .btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+}
+
+/* Contact info */
+.contact-info {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Footer spacing */
+footer {
+  margin-top: 0;
+  padding-top: 10px;
 }
 
 /* Button */
