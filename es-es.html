@@ -1,184 +1,140 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jirando</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Jirando ayuda a equipos a implementar y optimizar soluciones Atlassian con foco en resultados.">
+  <title>Jirando | Consultoría Atlassian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- Header Placeholder -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
   <div id="header-placeholder"></div>
 
-  <!-- Hero Section -->
-  <section id="hero" style="position: relative;">
-    <div style="text-align:center; padding: 100px 20px;">
-      <h1 class="hero-title">Jirando</h1>
-      <h5 style="color: var(--primary);">por HDR Soluciones en TI</h5>
-      
-      <h2 class="lang es active">Consultoría Especializada en Soluciones Atlassian</h2>
-      <p class="lang es active hero-desc">
-        Transformamos la forma en que su equipo trabaja con soluciones Atlassian.
-      </p>
-      <a href="#contact">Contáctanos</a>
-    </div>
-  </section>
+  <main id="main-content" class="site-main">
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Jirando</h1>
+          <p class="hero-signature">by HDR Soluções em TI</p>
+          <p>Jirando transforma Jira, Confluence y JSM en flujos claros para mejorar entrega, colaboración y calidad de servicio.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Contáctanos</a>
+            <a class="btn btn-ghost" href="#services">Ver servicios</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="images/home/home.jpg" alt="Equipo trabajando en estrategia Atlassian">
+        </div>
+      </div>
+    </section>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2 class="lang es active">Sobre Jirando</h2>
-    <div class="about-content">
-      <div class="about-block">
-        <img src="images/content/about/strategic_partner.jpg" alt="Socio Estratégico" style="width:100%; height:auto; margin-bottom:10px;">
-        <h3>Socio Estratégico</h3>
-        <p class="lang es active">
-          Jirando se posiciona como un socio estratégico para empresas que buscan obtener el máximo valor de las soluciones Atlassian.
-        </p>
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">Sobre Jirando</h2>
+        <p class="section-intro">Actuamos como socio estratégico para organizaciones que buscan un ecosistema Atlassian moderno, escalable y medible.</p>
+        <div class="grid grid-3">
+          <article class="card">
+            <div class="card-media"><img src="images/content/about/strategic_partner.jpg" alt="Socio estratégico"></div>
+            <h3>Socio estratégico</h3>
+            <p>Alineamos decisiones de herramientas con objetivos de negocio, estructura de equipos y gobernanza.</p>
+          </article>
+          <article class="card">
+            <div class="card-media"><img src="images/content/about/dig_transform.jpg" alt="Transformación digital"></div>
+            <h3>Transformación digital</h3>
+            <p>Desde rediseño de procesos hasta migración cloud, impulsamos evolución sin fricción operativa.</p>
+          </article>
+          <article class="card">
+            <div class="card-media"><img src="images/content/about/consult.jpg" alt="Implementación e integración"></div>
+            <h3>Implementación e integración</h3>
+            <p>Implementamos Jira, Confluence e integraciones sostenibles para una operación en crecimiento.</p>
+          </article>
+        </div>
       </div>
-      <div class="about-block">
-        <img src="images/content/about/consult.jpg"  alt="Consultoría e Integración" style="width:100%; height:auto; margin-bottom:10px;">
-        <h3>Consultoría, Implementación e Integración</h3>
-        <p class="lang es active">
-          La consultoría, implementación e integración garantizan un ecosistema escalable y actualizado.
-        </p>
-      </div>
-      <div class="about-block">
-        <img src="images/content/about/dig_transform.jpg" alt="Transformación Digital" style="width:100%; height:auto; margin-bottom:10px;">
-        <h3>Transformación Digital</h3>
-        <p class="lang es active">
-          Experiencia en Jira, Confluence, Trello, Bitbucket y otras herramientas Atlassian para impulsar la innovación.
-        </p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Services Section -->
-  <section id="services">
-    <h2 class="lang es active">Servicios y Tecnologías</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="images/content/services/jira.jpg" alt="Ícono Jira Software" style="width:50px; height:50px;">
-        <h3>Jira Software</h3>
-        <p>Implementación y personalización con metodologías ágiles como Scrum y Kanban.</p>
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Servicios y tecnologías</h2>
+        <p class="section-intro">Soporte especializado para equipos de ingeniería, operaciones y atención usando productos Atlassian.</p>
+        <div class="grid grid-3">
+          <article class="card service-card"><img src="images/content/services/jira.jpg" alt="Jira Software"><h3>Jira Software</h3><p>Configuración ágil, diseño de workflows, automatización y reportes orientados a entrega.</p></article>
+          <article class="card service-card"><img src="images/content/services/confluence.jpg" alt="Confluence"><h3>Confluence</h3><p>Arquitectura de conocimiento y documentación colaborativa conectada con Jira.</p></article>
+          <article class="card service-card"><img src="images/content/services/jsm.jpg" alt="Jira Service Management"><h3>Jira Service Management</h3><p>Mesas de servicio, SLA e ITSM para una experiencia de soporte consistente.</p></article>
+          <article class="card service-card"><img src="images/content/services/others.jpg" alt="Ecosistema Atlassian"><h3>Ecosistema Atlassian</h3><p>Consultoría en Trello, Bitbucket, Opsgenie y Statuspage para plataformas conectadas.</p></article>
+          <article class="card service-card"><img src="images/content/services/devops_itil.jpg" alt="DevOps e ITIL"><h3>DevOps e ITIL</h3><p>Prácticas ágiles con gobernanza para acelerar innovación con control.</p></article>
+        </div>
       </div>
-      <div class="card">
-        <img src="images/content/services/confluence.jpg" alt="Ícono Confluence" style="width:50px; height:50px;">
-        <h3>Confluence</h3>
-        <p>Organización de wikis, manuales e informes integrados con Jira.</p>
-      </div>
-      <div class="card">
-        <img src="images/content/services/jsm.jpg" alt="Ícono Jira Service Management" style="width:50px; height:50px;">
-        <h3>Jira Service Management</h3>
-        <p>Gestión de servicios con flujos personalizados y paneles de métricas.</p>
-      </div>
-      <div class="card">
-        <img src="images/content/services/others.jpg" alt="Otras Herramientas Atlassian" style="width:50px; height:50px;">
-        <h3>Otras Herramientas Atlassian</h3>
-        <p>Consultoría en Trello, Bitbucket, Opsgenie y Statuspage.</p>
-      </div>
-      <div class="card">
-        <img src="images/content/services/devops_itil.jpg" alt="Ícono DevOps" style="width:50px; height:50px;">
-        <h3>DevOps e ITIL</h3>
-        <p>Integración de prácticas ágiles con marcos de gobernanza para la innovación.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-<!-- Success Section -->
-  <section id="success">
-    <h2 class="lang es active">Casos de Éxito</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="images/content/cases/jira_update.jpg" alt="Actualización Jira Server" style="width:40%; height:auto; margin-bottom:10px;">
-        <h4>Actualización de Jira Server y de las versiones de la base de datos, garantizando compatibilidad, estabilidad y mejor rendimiento</h4>
+    <section id="success">
+      <div class="container">
+        <h2 class="section-title">Casos de éxito</h2>
+        <p class="section-intro">Ejemplos de transformaciones entregadas para empresas medianas y grandes.</p>
+        <div class="grid grid-3">
+          <article class="card case-card"><img src="images/content/cases/jira_update.jpg" alt="Actualización de Jira"><h4>Actualización corporativa de Jira</h4><p>Upgrade de plataforma y base de datos con más compatibilidad, rendimiento y estabilidad.</p></article>
+          <article class="card case-card"><img src="images/content/cases/m2c.jpg" alt="Migración a Jira Cloud"><h4>Migración a cloud</h4><p>Migración de Server y Data Center a Jira Cloud con continuidad operativa.</p></article>
+          <article class="card case-card"><img src="images/content/cases/jira_conf_pbi.jpg" alt="Integración JSM con Confluence y Power BI"><h4>Operación de servicio integrada</h4><p>Implementación de JSM integrada con Confluence y Power BI para visibilidad ejecutiva.</p></article>
+          <article class="card case-card"><img src="images/content/cases/dash.jpg" alt="Panel de métricas"><h4>Paneles de métricas</h4><p>Dashboards con datos de Jira Cloud y JSM para decisiones de liderazgo.</p></article>
+          <article class="card case-card"><img src="images/content/cases/jira_jsm.jpg" alt="Integración JSM y Jira Cloud"><h4>Integración entre productos</h4><p>Integración confiable entre Jira Software y JSM para trazabilidad de punta a punta.</p></article>
+          <article class="card case-card"><img src="images/content/cases/rest.jpg" alt="Reestructuración de procesos"><h4>Reestructuración de procesos</h4><p>Rediseño operativo en Jira Cloud y JSM alineado con mejores prácticas de gobernanza.</p></article>
+        </div>
       </div>
-      <div class="card">
-        <img src="images/content/cases/m2c.jpg" alt="Migración a Jira Cloud" style="width:40%; height:auto; margin-bottom:10px;">
-        <h4>Migración de Jira DataCenter/Server (on-premises) a Jira Cloud para cumplir con el ciclo de fin de vida de Atlassian</h4>
+    </section>
+
+    <section id="clients">
+      <div class="container">
+        <h2 class="section-title">Nuestros clientes</h2>
+        <div class="grid clients-grid">
+          <article class="card"><img src="images/content/clients/acra.jpg" alt="Logo de Acra"></article>
+          <article class="card"><img src="images/content/clients/caixa.jpg" alt="Logo de Caixa"></article>
+          <article class="card"><img src="images/content/clients/tenda.jpg" alt="Logo de Tenda"></article>
+        </div>
       </div>
-      <div class="card">
-        <img src="images/content/cases/jira_conf_pbi.jpg" alt="JSM y Power BI" style="width:40%; height:auto; margin-bottom:10px;">
-        <h4>Implementación de Jira Service Management e integración con Confluence y reportes en Power BI</h4>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Contacto</h2>
+        <p class="section-intro">Cuéntanos tu desafío y te sugerimos el mejor próximo paso para tu entorno Atlassian.</p>
+        <div class="contact-wrap">
+          <div class="form-shell">
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div>
+                  <label for="name">Nombre</label>
+                  <input type="text" id="name" name="user_name" autocomplete="name" required>
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="user_email" autocomplete="email" required>
+                </div>
+                <div>
+                  <label for="message">Mensaje</label>
+                  <textarea id="message" name="message" required></textarea>
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+              <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+          <aside class="contact-meta" aria-label="Detalles de contacto">
+            <p class="contact-item"><span class="contact-icon" aria-hidden="true">☎</span><strong>Teléfono:</strong> +55 (31) 99140-0841</p>
+            <p class="contact-item"><span class="contact-icon" aria-hidden="true">✉</span><strong>Email:</strong> <a href="mailto:contato@jirando.com">contato@jirando.com</a></p>
+            <p>Atención para consultoría, implementación, migración y mejora continua de procesos.</p>
+          </aside>
+        </div>
       </div>
-      <div class="card">
-        <img src="images/content/cases/dash.jpg" alt="Métricas Jira Cloud" style="width:40%; height:auto; margin-bottom:10px;">
-        <h4>Implementación de métricas en Jira Cloud/JSM con paneles en Power BI</h4>
-      </div>
-      <div class="card">
-        <img src="images/content/cases/jira_jsm.jpg" alt="Integración JSM y Cloud" style="width:40%; height:auto; margin-bottom:10px;">
-        <h4>Integración entre Jira Service Management y Jira Cloud</h4>
-      </div>
-       <div class="card">
-        <img src="images/content/cases/rest.jpg" alt="Reestructuración" style="width:40%; height:auto; margin-bottom:10px;">
-        <h4>Reestructuración de Jira Cloud y Jira Service Management, alineándose con las mejores prácticas en gobernanza, atención al cliente y gestión de procesos</h4>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  </form>
-    <p style="margin-top:20px; text-align:center; font-weight:bold;">
-    </p>
-
-    <!-- Clients Section -->
-  <section id="clients">
-    <h2 class="lang en active">Nuestros Clientes</h2>
-    <div class="grid">
-      
-      <div class="card">
-        <img src="images/content/clients/acra.jpg" alt="Client 1 Logo">
-      </div>
-
-      <div class="card">
-        <img src="images/content/clients/caixa.jpg" alt="Client 2 Logo">
-      </div>
-
-      <div class="card">
-        <img src="images/content/clients/tenda.jpg" alt="Client 3 Logo">
-      </div>
-
-    </div>
-  </section>
-
-   </form>
-    <p style="margin-top:35px; text-align:center; font-weight:bold;">
-    </p>
-
-<!-- Emailjs necessary  -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
-<!-- Contact Section -->
-<section id="contact" style="position:relative;">
-  <h2 class="lang en active">Contact</h2>
-
-  <!-- Contact Form -->
-<form id="contactForm">
-  <input type="text" id="name" name="user_name" placeholder="Nombre" required>
-  <input type="email" id="email" name="user_email" placeholder="Email" required>
-  <textarea id="message" name="message" rows="5" placeholder="Mensaje" required></textarea>
-    
-    <!-- Send Button with type="submit" -->
-<button type="submit" class="btn">Enviar</button>
-</form>
-
- <!-- Mail and phone--> 
-     <p style="margin-top:20px; text-align:center; font-weight:bold;">
-      Phone: +55 (31) 991400841
-    </p>
-     <p class="email-container">
-      Email: <a href="mailto:contato@jirando.com" class="cool-blue-link">contato@jirando.com</a>
-    </p>
-
-</section>
-
-</section>
-  <!-- WhatsApp Floating Icon -->
-  <a href="https://wa.me/5531991400841" target="_blank" class="whatsapp-float">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  <a href="https://wa.me/5531991400841" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Hablar con Jirando por WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Icono de WhatsApp">
   </a>
 
-  <!-- Footer Placeholder -->
   <div id="footer-placeholder"></div>
 
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>

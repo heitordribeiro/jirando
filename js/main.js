@@ -1,183 +1,144 @@
-// ==============================
-// Clear Cookies and Storage
-// ==============================
-function clearAllCookies() {
-  document.cookie.split(";").forEach(cookie => {
-    const name = cookie.split("=")[0].trim();
-    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+const pathName = window.location.pathname.toLowerCase();
+const pageLang = pathName.includes("pt-br") ? "pt" : pathName.includes("es-es") ? "es" : "en";
+
+function applyLanguageText(root = document) {
+  root.querySelectorAll(".lang-text").forEach((node) => {
+    const value = node.getAttribute(`data-${pageLang}`);
+    if (value) {
+      node.innerHTML = value;
+    }
   });
 }
 
-function clearStorage() {
-  localStorage.clear();
-  sessionStorage.clear();
-}
-
-
-
-// ==============================
-// Show Footer Only on Desktop
-// ==============================
-function updateFooterVisibility() {
-  const footer = document.getElementById('footer');
-  if (!footer) return;
-
-  // Show footer only on desktop (>=768px) and when on the contact section
-  if (window.innerWidth >= 768) {
-    // Check if we're on the contact section/page
-    const contactSection = document.getElementById('contact');
-    if (contactSection && (window.location.hash === '#contact' || window.location.pathname.includes('contact'))) {
-      footer.classList.add('show-footer');  // Show footer on desktop
-    } else {
-      footer.classList.remove('show-footer');  // Hide footer if not on contact
-    }
-  } else {
-    footer.classList.remove('show-footer');  // Always hide footer on mobile
-  }
-}
-
-
-// ==============================
-// Smooth Scroll + Contact Button Scroll
-// ==============================
-document.addEventListener('click', function (e) {
-  const anchor = e.target.closest('a[href^="#"]');
-  if (!anchor) return;
-
-  e.preventDefault();
-  const targetId = anchor.getAttribute('href').substring(1);
+async function loadPartial(targetId, filePath) {
   const target = document.getElementById(targetId);
+  if (!target) {
+    return;
+  }
 
-  if (targetId === 'contact') {
-    updateFooterVisibility();
-    // Scroll to contact section
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Also scroll to bottom to reveal footer on desktop
-    if (window.innerWidth >= 768) {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  try {
+    const response = await fetch(filePath, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Failed to load ${filePath} (${response.status})`);
     }
-  } else if (target) {
-    // Normal smooth scroll for other anchors
-    const header = document.querySelector('header');
-    const headerHeight = header ? header.offsetHeight : 0;
-    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+
+    target.innerHTML = await response.text();
+    applyLanguageText(target);
+  } catch (error) {
+    console.error(error);
   }
-});
+}
 
-
-// ==============================
-// WhatsApp Icon Float
-// ==============================
-const whatsappIcon = document.getElementById('whatsappIcon');
-const footerEl = document.getElementById('footer');
-
-window.addEventListener('scroll', () => {
-  if (!whatsappIcon || !footerEl) return;
-  const footerRect = footerEl.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  if (footerRect.top < windowHeight) {
-    const overlap = windowHeight - footerRect.top;
-    whatsappIcon.style.bottom = `${overlap + 20}px`;
-  } else {
-    whatsappIcon.style.bottom = '20px';
-  }
-});
-
-// ==============================
-// Redirect index.html to Browser Language
-// ==============================
-document.addEventListener('DOMContentLoaded', () => {
-  clearAllCookies();
-  clearStorage();
-
-  const page = window.location.pathname.split("/").pop().toLowerCase();
-  if(page === '' || page === 'index.html') {
-    const lang = navigator.language || navigator.userLanguage;
-    if(lang.startsWith('pt')) window.location.href = 'pt-br.html';
-    else if(lang.startsWith('es')) window.location.href = 'es-es.html';
-    else window.location.href = 'en-us.html'; // default
+function closeMobileMenu() {
+  const menu = document.querySelector(".menu");
+  const toggle = document.querySelector(".nav-toggle");
+  if (!menu || !toggle) {
+    return;
   }
 
-  // Direct access to contact page shows footer
-  if (page.includes('contact')) {
-    updateFooterVisibility();
+  menu.classList.remove("open");
+  toggle.setAttribute("aria-expanded", "false");
+}
+
+function initMobileMenu() {
+  const menu = document.querySelector(".menu");
+  const toggle = document.querySelector(".nav-toggle");
+  if (!menu || !toggle) {
+    return;
   }
-});
 
-// ==============================
-// Initialize Header Language
-// ==============================
-function initHeaderLang() {
-  const page = window.location.pathname.split("/").pop().toLowerCase();
-  let lang = 'pt';
-  if(page.includes('en-us')) lang = 'en';
-  else if(page.includes('es-es')) lang = 'es';
+  toggle.addEventListener("click", () => {
+    const isOpen = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
 
-  document.querySelectorAll('.lang-text').forEach(el => {
-    const text = el.getAttribute(`data-${lang}`);
-    if(text) el.innerHTML = text;
+  menu.querySelectorAll("a[href^='#']").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 760) {
+      closeMobileMenu();
+    }
   });
 }
 
-// ==============================
-// Load Header & Footer Partials
-// ==============================
-async function loadPartial(id, url){
-  const res = await fetch(url);
-  const html = await res.text();
-  document.getElementById(id).innerHTML = html;
-
-  if(id === 'header-placeholder') {
-    initHeaderLang();
-
-    // Hamburger Menu Toggle
-    const hamburger = document.querySelector('.hamburger');
-    const menu = document.querySelector('.menu');
-    if(hamburger && menu){
-      hamburger.addEventListener('click', () => {
-        menu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-      });
-
-      menu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          menu.classList.remove('active');
-          hamburger.classList.remove('active');
-        });
-      });
+function initSmoothScroll() {
+  document.addEventListener("click", (event) => {
+    const anchor = event.target.closest("a[href^='#']");
+    if (!anchor) {
+      return;
     }
-  }
 
-  if(id === 'footer-placeholder') {
-    initHeaderLang();
-  }
+    const targetId = anchor.getAttribute("href").slice(1);
+    const target = document.getElementById(targetId);
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    document.querySelectorAll(".menu > a[href^='#']").forEach((link) => {
+      link.removeAttribute("aria-current");
+    });
+    anchor.setAttribute("aria-current", "true");
+
+    const headerHeight = document.querySelector(".site-header")?.offsetHeight || 0;
+    const baseTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+    const available = window.innerHeight - headerHeight - 24;
+    const shouldCenter = targetId === "contact" && target.offsetHeight < available;
+    const offsetTop = shouldCenter
+      ? Math.max(0, baseTop - Math.round((available - target.offsetHeight) / 2))
+      : baseTop;
+    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+  });
 }
 
-// ==============================
-// Load Partials
-// ==============================
-loadPartial('header-placeholder','partials/header.html');
-loadPartial('footer-placeholder','partials/footer.html');
+function initActiveSection() {
+  const links = Array.from(document.querySelectorAll(".menu > a[href^='#']"));
+  const map = new Map(
+    links.map((link) => [link.getAttribute("href")?.slice(1), link]).filter(([id]) => Boolean(id))
+  );
 
-// ==============================
-// Show Footer Only on Desktop
-// ==============================
-function updateFooterVisibility() {
-  const footer = document.getElementById('footer');
-  if (!footer) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const link = map.get(entry.target.id);
+        if (!link) {
+          return;
+        }
 
-  // Show footer only on desktop (>=768px) and when on the contact section
-  if (window.innerWidth >= 768) {
-    // Check if we're on the contact section/page
-    const contactSection = document.getElementById('contact');
-    if (contactSection && (window.location.hash === '#contact' || window.location.pathname.includes('contact'))) {
-      footer.classList.add('show-footer');  // Show footer on desktop
-    } else {
-      footer.classList.remove('show-footer');  // Hide footer if not on contact
+        if (entry.isIntersecting) {
+          links.forEach((candidate) => candidate.removeAttribute("aria-current"));
+          link.setAttribute("aria-current", "true");
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -50% 0px", threshold: 0.1 }
+  );
+
+  map.forEach((_, id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      observer.observe(section);
     }
-  } else {
-    footer.classList.remove('show-footer');  // Always hide footer on mobile
-  }
+  });
 }
+
+function updateYear() {
+  document.querySelectorAll("#currentYear").forEach((item) => {
+    item.textContent = String(new Date().getFullYear());
+  });
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await Promise.all([
+    loadPartial("header-placeholder", "partials/header.html"),
+    loadPartial("footer-placeholder", "partials/footer.html")
+  ]);
+
+  applyLanguageText();
+  initMobileMenu();
+  initSmoothScroll();
+  initActiveSection();
+  updateYear();
+});

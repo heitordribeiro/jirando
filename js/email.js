@@ -1,73 +1,87 @@
-// Initialize EmailJS
-(function(){
-  emailjs.init("cF-aWnWqc8T5iFeZ2");
-})();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const statusNode = document.getElementById("formStatus");
+  const submitButton = form?.querySelector("button[type='submit']");
 
-// Get form element
-const form = document.getElementById('contactForm');
-
-// Detect language from file name
-const path = window.location.pathname.toLowerCase();
-
-let lang = 'en';
-if (path.includes('pt-br')) lang = 'pt';
-else if (path.includes('es-es')) lang = 'es';
-else if (path.includes('en-us')) lang = 'en';
-
-// Messages
-const messages = {
-  en: {
-    success: "🎉 Your message has been sent! We'll get back to you soon.",
-    error: "😕 Oops! Something went wrong. Please try again."
-  },
-  pt: {
-    success: "🎉 Sua mensagem foi enviada! Vamos responder em breve.",
-    error: "😕 Ops! Algo deu errado. Tente novamente."
-  },
-  es: {
-    success: "🎉 ¡Tu mensaje ha sido enviado! Te responderemos pronto.",
-    error: "😕 ¡Ups! Algo salió mal. Inténtalo de nuevo."
+  if (!form) {
+    console.warn("Form not found: #contactForm");
+    return;
   }
-};
 
-const text = messages[lang] || messages['en'];
+  // Detect language from URL
+  const pathName = window.location.pathname.toLowerCase();
+  const pageLang = pathName.includes("pt-br")
+    ? "pt"
+    : pathName.includes("es-es")
+    ? "es"
+    : "en";
 
-// Create top popup
-const messageBox = document.createElement('div');
-messageBox.style.position = 'fixed';
-messageBox.style.top = '20px';
-messageBox.style.left = '50%';
-messageBox.style.transform = 'translateX(-50%)';
-messageBox.style.padding = '12px 20px';
-messageBox.style.borderRadius = '8px';
-messageBox.style.color = '#fff';
-messageBox.style.fontFamily = 'Arial';
-messageBox.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
-messageBox.style.display = 'none';
-messageBox.style.zIndex = '9999';
-document.body.appendChild(messageBox);
+  const messages = {
+    en: {
+      sending: "Sending your message...",
+      success: "Message sent successfully. We will contact you soon.",
+      error: "We could not send your message right now. Please try again."
+    },
+    pt: {
+      sending: "Enviando sua mensagem...",
+      success: "Mensagem enviada com sucesso. Entraremos em contato em breve.",
+      error: "Não foi possível enviar sua mensagem agora. Tente novamente."
+    },
+    es: {
+      sending: "Enviando tu mensaje...",
+      success: "Mensaje enviado correctamente. Te contactaremos pronto.",
+      error: "No pudimos enviar tu mensaje ahora. Inténtalo nuevamente."
+    }
+  };
 
-function showMessage(success = true) {
-  messageBox.textContent = success ? text.success : text.error;
-  messageBox.style.backgroundColor = success ? '#4CAF50' : '#f44336';
-  messageBox.style.display = 'block';
+  const text = messages[pageLang] || messages.en;
 
-  setTimeout(() => {
-    messageBox.style.display = 'none';
-  }, 3000);
-}
+  function setStatus(message, type = "") {
+    if (!statusNode) return;
 
-// Submit event
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
+    statusNode.textContent = message;
+    statusNode.classList.remove("success", "error");
 
-  emailjs.sendForm('service_d4s4v4q', 'template_quek7dx', form)
-    .then(() => {
-      showMessage(true);
+    if (type) {
+      statusNode.classList.add(type);
+    }
+  }
+
+  // ✅ Initialize EmailJS safely
+  if (window.emailjs && typeof window.emailjs.init === "function") {
+    window.emailjs.init("cF-aWnWqc8T5iFeZ2");
+  } else {
+    console.error("EmailJS not loaded properly.");
+  }
+
+  // ✅ Handle form submit
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault(); // 🚫 stop page refresh
+    console.log("Form submission intercepted");
+
+    if (!window.emailjs || typeof window.emailjs.sendForm !== "function") {
+      console.error("EmailJS not available at submit time.");
+      setStatus(text.error, "error");
+      return;
+    }
+
+    submitButton?.setAttribute("disabled", "true");
+    setStatus(text.sending);
+
+    try {
+      await window.emailjs.sendForm(
+        "service_d4s4v4q",
+        "template_quek7dx",
+        form
+      );
+
       form.reset();
-    })
-    .catch((error) => {
-      console.error('Error sending email:', error);
-      showMessage(false);
-    });
+      setStatus(text.success, "success");
+    } catch (error) {
+      console.error("EmailJS send error:", error);
+      setStatus(text.error, "error");
+    } finally {
+      submitButton?.removeAttribute("disabled");
+    }
+  });
 });
