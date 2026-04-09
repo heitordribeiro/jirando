@@ -173,147 +173,63 @@ section h2::after {
    Contact Form & Buttons
 ============================== */
 
-/* Ensure the body and html take full height */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-/* Contact Section: full viewport */
-#contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;   /* vertical center */
-  align-items: center;       /* horizontal center */
-  min-height: 100vh;         /* full screen height */
-  padding: 0 15px;
-  box-sizing: border-box;
-  position: relative;
-}
-
-/* Form container */
 #contact form {
-  width: 100%;
-  max-width: 400px;          /* compact width */
+  max-width: 400px; /* Slightly wider form */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 15px;
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  box-sizing: border-box;
-
-  /* make form flexible for viewport */
-  max-height: calc(100vh - 60px); /* leave space for contact info & footer */
-  overflow-y: auto;               /* scroll if content too tall */
+  gap: 15px; /* Increased gap between form elements */
+  padding: 30px;
+  background-color: #f8f8f8; /* Light background color for contrast */
+  border-radius: 10px; /* Rounded corners for the form */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
 }
 
-/* Inputs and textarea */
 #contact input,
 #contact textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 0.95rem;
+  padding: 14px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+  width: 100%; /* Ensure inputs fill container */
+  box-sizing: border-box; /* Prevents padding from affecting the width */
 }
 
-/* Focus effect */
 #contact input:focus,
 #contact textarea:focus {
   border-color: var(--primary);
   outline: none;
 }
 
-/* Button */
-#contact .btn {
-  padding: 10px 25px;
-  font-size: 0.95rem;
+.btn {
+  margin-top: 20px;
+  padding: 15px 35px;
   border-radius: 50px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: #fff;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  align-self: center;
-  transition: transform 0.3s, background 0.3s;
+  text-transform: uppercase; /* Adds a more modern look to the button text */
+  letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
+  transition: 0.3s;
+  position: relative;
+  z-index: 1;
+  cursor: pointer; /* hand cursor for Send button */
+  align-self: center; /* Centers the button in the form */
 }
 
-#contact .btn:hover {
-  transform: translateY(-2px);
+.btn:hover {
+  transform: translateY(-3px);
   background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
 
-/* Contact info */
 .contact-info {
-  margin-top: 10px;
+  margin-top: 25px;
   text-align: center;
   font-weight: bold;
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 1rem;
+  color: #333; /* Slightly darker text for the contact info */
 }
-
-/* Remove extra space at bottom of contact section */
-#contact {
-  padding-bottom: 10px;  /* reduce padding at the bottom */
-  margin-bottom: 0;      /* remove any bottom margin */
-}
-
-/* Reduce spacing of last elements inside contact */
-#contact .contact-info,
-#contact form {
-  margin-bottom: 0;      /* remove any default margin */
-}
-
-/* Footer */
-footer {
-  margin-top: 0;          /* remove top margin */
-  padding-top: 15px;      /* small padding for breathing room */
-}
-
-/* Button */
-#contact .btn {
-  padding: 10px 25px;
-  font-size: 0.95rem;
-  border-radius: 50px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  align-self: center;
-  transition: transform 0.3s, background 0.3s;
-}
-
-#contact .btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
-}
-
-/* Contact info */
-.contact-info {
-  margin-top: 10px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-/* Footer spacing */
-footer {
-  margin-top: 0;
-  padding-top: 15px;
-}
-@media (max-height: 600px) {
-  #contact form {
-    max-height: 60vh;
-  }
-}
-
 
 /* ==============================
    Icon Buttons
@@ -359,11 +275,10 @@ footer {
 ============================== */
 footer {
   background-color: var(--primary);
-  color: #fff;
-  text-align: center;
-  border-radius: 20px 20px 0 0;
-  padding: 15px 20px;
-  margin-top: 40px;
+  color:#fff;
+  text-align:center;
+  padding:30px 20px;
+  border-radius:20px 20px 0 0;
 }
 footer a { color: var(--accent); text-decoration: underline; }
 
@@ -378,8 +293,6 @@ footer a { color: var(--accent); text-decoration: underline; }
     display: block;
   }
 }
-
-
 
 /* ==============================
    Responsiveness
