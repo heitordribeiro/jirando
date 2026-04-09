@@ -173,47 +173,55 @@ section h2::after {
    Contact Form & Buttons
 ============================== */
 
-/* Contact Section Fit on Screen */
+/* Contact Section: full screen fit */
 #contact {
-  min-height: 100vh;          /* full viewport height */
   display: flex;
   flex-direction: column;
-  justify-content: center;    /* vertically center the form */
-  align-items: center;        /* center horizontally */
-  padding: 20px 15px;         /* small padding around section */
-  margin: 0;                  /* remove extra spacing */
+  justify-content: center;   /* vertical center */
+  align-items: center;       /* horizontal center */
+  min-height: 100vh;         /* full viewport height */
+  padding: 10px 15px;
+  margin: 0;
   box-sizing: border-box;
 }
 
+/* Form container */
 #contact form {
   width: 100%;
-  max-width: 450px;            /* compact width */
+  max-width: 400px;          /* compact width */
   display: flex;
   flex-direction: column;
-  gap: 12px;                   /* spacing between inputs/buttons */
-  padding: 20px;
+  gap: 10px;
+  padding: 15px;
   background-color: #f8f8f8;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   box-sizing: border-box;
+
+  /* Make form flexible to fit viewport height */
+  max-height: 80vh;           /* prevent form from exceeding screen */
+  overflow-y: auto;           /* scroll inside if too tall */
 }
 
+/* Inputs and textarea */
 #contact input,
 #contact textarea {
   width: 100%;
-  padding: 12px;
-  font-size: 1rem;
+  padding: 10px;
+  font-size: 0.95rem;
   border-radius: 8px;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
 
+/* Focus effect */
 #contact input:focus,
 #contact textarea:focus {
   border-color: var(--primary);
   outline: none;
 }
 
+/* Button */
 #contact .btn {
   padding: 10px 25px;
   font-size: 0.95rem;
@@ -233,38 +241,19 @@ section h2::after {
   background: linear-gradient(135deg, var(--secondary), var(--primary));
 }
 
+/* Contact info */
 .contact-info {
   margin-top: 10px;
   text-align: center;
   font-weight: bold;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #333;
 }
 
+/* Footer spacing */
 footer {
   margin-top: 0;
-  padding-top: 20px;
-}
-
-.btn {
-  margin-top: 15px;
-  padding: 15px 35px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase; /* Adds a more modern look to the button text */
-  letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
-  transition: 0.3s;
-  position: relative;
-  z-index: 1;
-  cursor: pointer; /* hand cursor for Send button */
-  align-self: center; /* Centers the button in the form */
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  padding-top: 15px;
 }
 
 
@@ -494,7 +483,7 @@ footer a { color: var(--accent); text-decoration: underline; }
 
 /* Hyper link email on contact*/
 .email-container {
-  margin-top: 5px;
+  margin-top: 10px;
   text-align: center;
   font-weight: bold;
 }
