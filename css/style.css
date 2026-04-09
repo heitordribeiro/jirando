@@ -174,14 +174,14 @@ section h2::after {
 ============================== */
 
 #contact form {
-  max-width: 600px; /* Slightly wider form */
-  min-height: 50vh; /* full viewport height */
+  max-width: 500px; /* Slightly wider form */
+  min-height: 30vh; /* full viewport height */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center; /* center form vertically */
   gap: 15px; /* Increased gap between form elements */
-  padding: 20px;
+  padding: 15px;
   background-color: #f8f8f8; /* Light background color for contrast */
   border-radius: 10px; /* Rounded corners for the form */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
