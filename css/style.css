@@ -184,7 +184,7 @@ section h2::after {
   border-radius:50px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color:#fff;
-  font-weight:600;
+  font-weight:400;
   transition:0.3s;
   position: relative;
   z-index:1;
