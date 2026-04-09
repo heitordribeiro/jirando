@@ -2,44 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EmailJS Test Form</title>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <title>Jirando - Redirecting</title>
   <script>
-    // Initialize EmailJS with your user ID
-    (function(){
-      emailjs.init("cF-aWnWqc8T5iFeZ2"); // Replace with your EmailJS user ID
-    })();
-
-    function sendEmail(event) {
-      event.preventDefault(); // Prevent default form submission
-
-      const form = document.getElementById('contact-form');
-
-      emailjs.sendForm('service_d4s4v4q', 'template_quek7dx', form)
-        .then(() => {
-          alert('Email sent successfully!');
-          form.reset();
-        }, (error) => {
-          console.error('Failed to send email:', error);
-          alert('Failed to send email. Check console for details.');
-        });
+    // Detect browser language and redirect
+    const lang = navigator.language || navigator.userLanguage;
+    if (lang.startsWith('pt')) {
+      window.location.href = 'pt-br.html';
+    } else if (lang.startsWith('es')) {
+      window.location.href = 'es-es.html';
+    } else {
+      window.location.href = 'en-us.html';
     }
   </script>
 </head>
 <body>
-  <h2>Test EmailJS Form</h2>
-  <form id="contact-form" onsubmit="sendEmail(event)">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required><br><br>
-
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-
-    <label for="message">Message:</label><br>
-    <textarea id="message" name="message" required></textarea><br><br>
-
-    <button type="submit">Send Email</button>
-  </form>
+  <p>Redirecting based on your browser language...</p>
 </body>
 </html>
