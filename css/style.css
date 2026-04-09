@@ -171,7 +171,7 @@ section h2::after {
 /* ==============================
    Contact Form & Buttons
 ============================== */
-#contact form { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:18px; }
+#contact form { max-width:400px; margin:0 auto; display:flex; flex-direction:column; gap:18px; }
 #contact input, #contact textarea {
   padding:14px; border-radius:8px; border:1px solid #ccc; font-size:1rem;
   transition:border 0.3s;
