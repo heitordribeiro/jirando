@@ -16,7 +16,7 @@ function clearStorage() {
 // ==============================
 // EmailJS Initialization
 // ==============================
-emailjs.init('YOUR_PUBLIC_KEY');
+emailjs.init('cF-aWnWqc8T5iFeZ2');
 
 // ==============================
 // Show Footer Only on Desktop
@@ -78,11 +78,11 @@ if(contactForm) {
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
+    emailjs.send('service_d4s4v4q','template_quek7dx',{
       from_name: name,
       from_email: email,
       message: message,
-      to_email: 'test@test.com'
+      to_email: 'contactfromsite@jirando.com'
     }).then(() => alert('Email enviado com sucesso!'))
       .catch(err => alert('Erro ao enviar email: ' + err));
   });
