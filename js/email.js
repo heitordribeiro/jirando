@@ -52,3 +52,14 @@ function showResponseMessage(message, type) {
     responseMessage.style.display = 'none';
   }, 5000);
 }
+console.log("Form Submitted");
+
+sendEmail(name, email, message)
+  .then(function (response) {
+    console.log("Email sent successfully", response);
+    showResponseMessage('¡Mensaje enviado con éxito!', 'success');
+  })
+  .catch(function (err) {
+    console.error('Error al enviar el email:', err);
+    showResponseMessage('Ocurrió un error al enviar el mensaje. Inténtalo nuevamente.', 'error');
+  });
