@@ -451,3 +451,19 @@ footer a { color: var(--accent); text-decoration: underline; }
     background-color: #F44336; /* Red */
 }
 
+/* Hyper link email on contact*/
+.email-container {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cool-blue-link {
+  color: #1E90FF;              /* Dodger Blue */
+  text-decoration: underline;  /* Always underlined */
+  font-weight: bold;           /* Optional, matches container */
+}
+
+.cool-blue-link:hover {
+  color: #104E8B;              /* Darker blue on hover */
+}
