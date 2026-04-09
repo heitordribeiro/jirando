@@ -16,7 +16,7 @@ function clearStorage() {
 // ==============================
 // EmailJS Initialization
 // ==============================
-emailjs.init('cF-aWnWqc8T5iFeZ2');
+//emailjs.init('cF-aWnWqc8T5iFeZ2');
 
 // ==============================
 // Show Footer Only on Desktop
@@ -73,7 +73,7 @@ document.addEventListener('click', function (e) {
 const contactForm = document.getElementById('contactForm');
 
 // Initialize EmailJS with your user ID
-emailjs.init('YOUR_USER_ID'); // Replace with your actual EmailJS user ID
+emailjs.init('cF-aWnWqc8T5iFeZ2'); // Replace with your actual EmailJS user ID
 
 if(contactForm) {
     contactForm.addEventListener('submit', function(e){
