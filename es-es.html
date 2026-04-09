@@ -145,27 +145,32 @@
     <p style="margin-top:35px; text-align:center; font-weight:bold;">
     </p>
 
+// EmailJS
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 <!-- Contact Section -->
 <section id="contact" style="position:relative;">
   <h2 class="lang en active">Contact</h2>
 
   <!-- Contact Form -->
-  <form id="contactForm">
-    <input type="text" id="name" placeholder="Nombre" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <textarea id="message" rows="5" placeholder="Mensaje" required></textarea>
+<form id="contactForm">
+  <input type="text" id="name" name="user_name" placeholder="Nombre" required>
+  <input type="email" id="email" name="user_email" placeholder="Email" required>
+  <textarea id="message" name="message" rows="5" placeholder="Mensaje" required></textarea>
     
     <!-- Send Button with type="submit" -->
-    <button type="submit" class="btn">Enviar</button>
-  </form>
+<button type="submit" class="btn">Enviar</button>
+</form>
 
  <!-- Mail and phone--> 
      <p style="margin-top:20px; text-align:center; font-weight:bold;">
-      Telefóno: +55 (31) 991400841
+      Phone: +55 (31) 991400841
     </p>
      <p class="email-container">
       Email: <a href="mailto:contato@jirando.com" class="cool-blue-link">contato@jirando.com</a>
     </p>
+
+</section>
 
 </section>
   <!-- WhatsApp Floating Icon -->
