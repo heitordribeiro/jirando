@@ -185,6 +185,8 @@ section h2::after {
   background-color: #f8f8f8; /* Light background color for contrast */
   border-radius: 10px; /* Rounded corners for the form */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
+  padding-bottom: 20px; /* reduce padding at the bottom */
+  margin-bottom: 0;     /* remove extra margin if any */
 }
 
 #contact input,
@@ -203,6 +205,7 @@ section h2::after {
   border-color: var(--primary);
   outline: none;
 }
+
 
 .btn {
   margin-top: 15px;
@@ -281,6 +284,10 @@ footer {
   text-align:center;
   padding:30px 20px;
   border-radius:20px 20px 0 0;
+  margin-top: 0;         /* remove any top margin from footer */
+  padding-top: 20px;     /* optional: small padding for breathing room */
+
+
 }
 footer a { color: var(--accent); text-decoration: underline; }
 
