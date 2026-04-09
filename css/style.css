@@ -171,28 +171,63 @@ section h2::after {
 /* ==============================
    Contact Form & Buttons
 ============================== */
-#contact form { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:18px; }
-#contact input, #contact textarea {
-  padding:14px; border-radius:8px; border:1px solid #ccc; font-size:1rem;
-  transition:border 0.3s;
+
+#contact form {
+  max-width: 600px; /* Slightly wider form */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between form elements */
+  padding: 30px;
+  background-color: #f8f8f8; /* Light background color for contrast */
+  border-radius: 10px; /* Rounded corners for the form */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
 }
-#contact input:focus, #contact textarea:focus { border-color: var(--primary); outline:none; }
+
+#contact input,
+#contact textarea {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+  width: 100%; /* Ensure inputs fill container */
+  box-sizing: border-box; /* Prevents padding from affecting the width */
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
 
 .btn {
-  margin-top:20px;
-  padding:15px 35px;
-  border-radius:50px;
+  margin-top: 20px;
+  padding: 15px 35px;
+  border-radius: 50px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color:#fff;
-  font-weight:600;
-  transition:0.3s;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase; /* Adds a more modern look to the button text */
+  letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
+  transition: 0.3s;
   position: relative;
-  z-index:1;
+  z-index: 1;
   cursor: pointer; /* hand cursor for Send button */
+  align-self: center; /* Centers the button in the form */
 }
+
 .btn:hover {
   transform: translateY(-3px);
   background: linear-gradient(135deg, var(--secondary), var(--primary));
+}
+
+#contact p {
+  margin-top: 25px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333; /* Slightly darker text for the contact info */
 }
 
 /* ==============================
