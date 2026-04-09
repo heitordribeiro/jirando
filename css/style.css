@@ -354,14 +354,14 @@ footer {
 ============================== */
 footer {
   background-color: var(--primary);
-  color:#fff;
-  text-align:center;
-  padding:30px 20px;
-  border-radius:20px 20px 0 0;
-  margin-top: 0;         /* remove any top margin from footer */
-  padding-top: 15px;     /* optional: small padding for breathing room */
+  color: #fff;
+  text-align: center;
+  border-radius: 20px 20px 0 0;
 
+  /* Reduce overall padding */
+  padding: 10px 20px;   /* top/bottom 10px, left/right 20px */
 
+  margin-top: 0;         /* ensure no extra top margin */
 }
 footer a { color: var(--accent); text-decoration: underline; }
 
