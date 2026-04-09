@@ -308,6 +308,11 @@ footer {
   margin-top: 0;
   padding-top: 15px;
 }
+@media (max-height: 600px) {
+  #contact form {
+    max-height: 60vh;
+  }
+}
 
 
 /* ==============================
@@ -376,6 +381,8 @@ footer a { color: var(--accent); text-decoration: underline; }
     display: block;
   }
 }
+
+
 
 /* ==============================
    Responsiveness
