@@ -168,67 +168,31 @@ section h2::after {
 .card:hover h3, .about-block:hover h3,
 .card:hover p, .about-block:hover p { color:#fff; }
 
-
 /* ==============================
    Contact Form & Buttons
 ============================== */
-
-#contact form {
-  max-width: 400px; /* Slightly wider form */
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Increased gap between form elements */
-  padding: 30px;
-  background-color: #f8f8f8; /* Light background color for contrast */
-  border-radius: 10px; /* Rounded corners for the form */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
+#contact form { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:18px; }
+#contact input, #contact textarea {
+  padding:14px; border-radius:8px; border:1px solid #ccc; font-size:1rem;
+  transition:border 0.3s;
 }
-
-#contact input,
-#contact textarea {
-  padding: 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  transition: border 0.3s ease;
-  width: 100%; /* Ensure inputs fill container */
-  box-sizing: border-box; /* Prevents padding from affecting the width */
-}
-
-#contact input:focus,
-#contact textarea:focus {
-  border-color: var(--primary);
-  outline: none;
-}
+#contact input:focus, #contact textarea:focus { border-color: var(--primary); outline:none; }
 
 .btn {
-  margin-top: 20px;
-  padding: 15px 35px;
-  border-radius: 50px;
+  margin-top:20px;
+  padding:15px 35px;
+  border-radius:50px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase; /* Adds a more modern look to the button text */
-  letter-spacing: 1px; /* Slightly spaced letters for a cleaner look */
-  transition: 0.3s;
+  color:#fff;
+  font-weight:600;
+  transition:0.3s;
   position: relative;
-  z-index: 1;
+  z-index:1;
   cursor: pointer; /* hand cursor for Send button */
-  align-self: center; /* Centers the button in the form */
 }
-
 .btn:hover {
   transform: translateY(-3px);
   background: linear-gradient(135deg, var(--secondary), var(--primary));
-}
-
-.contact-info {
-  margin-top: 25px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #333; /* Slightly darker text for the contact info */
 }
 
 /* ==============================
@@ -426,44 +390,3 @@ footer a { color: var(--accent); text-decoration: underline; }
   margin-top: 10px;
 }
 
-
-/* Response message styles */
-.response-message {
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    text-align: center;
-    width: 300px;
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.response-message.success {
-    background-color: #4CAF50; /* Green */
-}
-
-.response-message.error {
-    background-color: #F44336; /* Red */
-}
-
-/* Hyper link email on contact*/
-.email-container {
-  margin-top: 10px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.cool-blue-link {
-  color: #1E90FF;              /* Dodger Blue */
-  text-decoration: underline;  /* Always underlined */
-  font-weight: bold;           /* Optional, matches container */
-}
-
-.cool-blue-link:hover {
-  color: #104E8B;              /* Darker blue on hover */
-}
