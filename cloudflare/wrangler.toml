@@ -10,4 +10,4 @@ routes = [
 [[d1_databases]]
 binding = "DB"
 database_name = "jirando_access_counter"
-database_id = "replace_with_cloudflare_d1_database_id"
+database_id = "f96a464b-9e57-46e0-929d-2e939709387e"
