@@ -6,6 +6,7 @@ const JSON_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type"
 };
 const ACCESS_WINDOW_MS = 24 * 60 * 60 * 1000;
+const EMAILJS_API_URL = "https://api.emailjs.com/api/v1.0/email/send";
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -156,11 +157,60 @@ async function registerAccess(request, db) {
   return {
     total: Number(totalRow?.total) || 0,
     counted: shouldCount,
-    ip,
     page,
     pageTotal: Number(pageRow?.total) || 0,
     lastAccessedAt: now
   };
+}
+
+function getRequiredEnv(env, key) {
+  const value = env[key];
+
+  if (!value) {
+    throw new Error(`Missing Worker secret: ${key}`);
+  }
+
+  return value;
+}
+
+function cleanString(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+async function sendContactEmail(request, env) {
+  const body = await request.json().catch(() => ({}));
+  const name = cleanString(body.name);
+  const email = cleanString(body.email);
+  const phone = cleanString(body.phone);
+  const message = cleanString(body.message);
+  const page = normalizePage(body.page);
+
+  if (!name || !email || !message) {
+    return jsonResponse({ error: "Missing required contact fields" }, 400);
+  }
+
+  const emailResponse = await fetch(EMAILJS_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: getRequiredEnv(env, "EMAILJS_SERVICE_ID"),
+      template_id: getRequiredEnv(env, "EMAILJS_TEMPLATE_ID"),
+      user_id: getRequiredEnv(env, "EMAILJS_PUBLIC_KEY"),
+      template_params: {
+        user_name: name,
+        user_email: email,
+        user_phone: phone,
+        message,
+        page
+      }
+    })
+  });
+
+  if (!emailResponse.ok) {
+    return jsonResponse({ error: "Email service failed" }, 502);
+  }
+
+  return jsonResponse({ ok: true });
 }
 
 export default {
@@ -175,19 +225,24 @@ export default {
 
     const url = new URL(request.url);
     const isApiAccess = url.pathname === "/api/access";
+    const isApiContact = url.pathname === "/api/contact";
     const isAccessFile = url.pathname === "/access-count.json";
 
-    if (!isApiAccess && !isAccessFile) {
+    if (!isApiAccess && !isApiContact && !isAccessFile) {
       return jsonResponse({ error: "Not found" }, 404);
     }
 
     try {
-      if (request.method === "GET") {
+      if ((isApiAccess || isAccessFile) && request.method === "GET") {
         return jsonResponse(await readAccess(env.DB));
       }
 
       if (isApiAccess && request.method === "POST") {
         return jsonResponse(await registerAccess(request, env.DB));
+      }
+
+      if (isApiContact && request.method === "POST") {
+        return await sendContactEmail(request, env);
       }
 
       return jsonResponse({ error: "Method not allowed" }, 405);

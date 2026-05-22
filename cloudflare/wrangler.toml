@@ -4,6 +4,7 @@ compatibility_date = "2026-05-22"
 
 routes = [
   { pattern = "www.jirando.com/api/access", zone_name = "jirando.com" },
+  { pattern = "www.jirando.com/api/contact", zone_name = "jirando.com" },
   { pattern = "www.jirando.com/access-count.json", zone_name = "jirando.com" }
 ]
 
