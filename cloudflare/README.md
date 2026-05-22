@@ -8,6 +8,15 @@ The counter is not displayed on the site. To check the access count, open:
 https://www.jirando.com/access-count.json
 ```
 
+The JSON includes:
+
+- `total`: counted visits across the site.
+- `pages`: counted visits by page.
+- `uniqueIps`: number of IPs recorded.
+- `visitors`: IP-level records with first seen, last seen, last counted, last page, and counted visits for that IP.
+
+A visit is counted only when the IP is new or when the same IP accesses the site at least 24 hours after its previous counted access. Switching from one language page to another within that 24-hour window updates the visitor's `lastSeenAt` and `lastPage`, but does not increment `total` or page counts.
+
 ## Setup
 
 1. In the Cloudflare dashboard, create a D1 database named `jirando_access_counter`.
