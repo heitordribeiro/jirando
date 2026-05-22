@@ -22,9 +22,6 @@ A visit is counted only when the IP is new or when the same IP accesses the site
 
    - `CLOUDFLARE_API_TOKEN`
    - `CLOUDFLARE_ACCOUNT_ID`
-   - `EMAILJS_SERVICE_ID`
-   - `EMAILJS_TEMPLATE_ID`
-   - `EMAILJS_PUBLIC_KEY`
 
 `CLOUDFLARE_API_TOKEN` must be the token value, not the token name or token ID. Create a custom token with these permissions scoped to the account/zone that owns `jirando.com`:
 
@@ -34,8 +31,6 @@ A visit is counted only when the IP is new or when the same IP accesses the site
 - Zone > Workers Routes > Edit
 
 `CLOUDFLARE_ACCOUNT_ID` must be the account ID from the same Cloudflare account where the D1 database exists. The workflow resolves the D1 database ID by name during deployment, so the database must exist in that account.
-
-The EmailJS values are uploaded to the Worker as Cloudflare secrets during deployment. They are not included in browser JavaScript, and the site submits contact forms through `https://www.jirando.com/api/contact`.
 
 ## Deploy From GitHub
 

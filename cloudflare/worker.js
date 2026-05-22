@@ -6,7 +6,6 @@ const JSON_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type"
 };
 const ACCESS_WINDOW_MS = 24 * 60 * 60 * 1000;
-const EMAILJS_API_URL = "https://api.emailjs.com/api/v1.0/email/send";
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -157,85 +156,33 @@ async function registerAccess(request, db) {
   return {
     total: Number(totalRow?.total) || 0,
     counted: shouldCount,
+    ip,
     page,
     pageTotal: Number(pageRow?.total) || 0,
     lastAccessedAt: now
   };
 }
 
-function getRequiredEnv(env, key) {
-  return cleanString(env[key]);
-}
-
-function cleanString(value) {
-  return typeof value === "string" ? value.trim() : "";
-}
-
-async function sendContactEmail(request, env) {
-  const body = await request.json().catch(() => ({}));
-  const name = cleanString(body.name);
-  const email = cleanString(body.email);
-  const phone = cleanString(body.phone);
-  const message = cleanString(body.message);
-  const page = normalizePage(body.page);
-
-  if (!name || !email || !message) {
-    return jsonResponse({ error: "missing_required_contact_fields" }, 400);
-  }
-
-  const serviceId = getRequiredEnv(env, "EMAILJS_SERVICE_ID");
-  const templateId = getRequiredEnv(env, "EMAILJS_TEMPLATE_ID");
-  const publicKey = getRequiredEnv(env, "EMAILJS_PUBLIC_KEY");
-
-  if (!serviceId || !templateId || !publicKey) {
-    return jsonResponse({ error: "missing_email_secret" }, 500);
-  }
-
-  const emailResponse = await fetch(EMAILJS_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service_id: serviceId,
-      template_id: templateId,
-      user_id: publicKey,
-      template_params: {
-        user_name: name,
-        user_email: email,
-        user_phone: phone,
-        message,
-        page
-      }
-    })
-  });
-
-  if (!emailResponse.ok) {
-    return jsonResponse({ error: "emailjs_rejected" }, 502);
-  }
-
-  return jsonResponse({ ok: true });
-}
-
 export default {
   async fetch(request, env) {
+    if (!env.DB) {
+      return jsonResponse({ error: "Missing D1 binding: DB" }, 500);
+    }
+
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: JSON_HEADERS });
     }
 
     const url = new URL(request.url);
     const isApiAccess = url.pathname === "/api/access";
-    const isApiContact = url.pathname === "/api/contact";
     const isAccessFile = url.pathname === "/access-count.json";
 
-    if (!isApiAccess && !isApiContact && !isAccessFile) {
+    if (!isApiAccess && !isAccessFile) {
       return jsonResponse({ error: "Not found" }, 404);
     }
 
     try {
-      if ((isApiAccess || isAccessFile) && !env.DB) {
-        return jsonResponse({ error: "missing_d1_binding" }, 500);
-      }
-
-      if ((isApiAccess || isAccessFile) && request.method === "GET") {
+      if (request.method === "GET") {
         return jsonResponse(await readAccess(env.DB));
       }
 
@@ -243,13 +190,9 @@ export default {
         return jsonResponse(await registerAccess(request, env.DB));
       }
 
-      if (isApiContact && request.method === "POST") {
-        return await sendContactEmail(request, env);
-      }
-
       return jsonResponse({ error: "Method not allowed" }, 405);
     } catch (error) {
-      return jsonResponse({ error: "worker_error" }, 500);
+      return jsonResponse({ error: error.message || "Access counter error" }, 500);
     }
   }
 };

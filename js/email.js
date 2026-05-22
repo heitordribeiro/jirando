@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Detect language from URL
   const pathName = window.location.pathname.toLowerCase();
-  const pageLang = pathName.includes("pt-br") ? "pt" : pathName.includes("es-es") ? "es" : "en";
-  const contactEndpoint = ["localhost", "127.0.0.1"].includes(window.location.hostname)
-    ? "https://www.jirando.com/api/contact"
-    : "/api/contact";
+  const pageLang = pathName.includes("pt-br")
+    ? "pt"
+    : pathName.includes("es-es")
+    ? "es"
+    : "en";
 
   const messages = {
     en: {
@@ -23,21 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
     pt: {
       sending: "Enviando sua mensagem...",
       success: "Mensagem enviada com sucesso. Entraremos em contato em breve.",
-      error: "Nao foi possivel enviar sua mensagem agora. Tente novamente."
+      error: "Não foi possível enviar sua mensagem agora. Tente novamente."
     },
     es: {
       sending: "Enviando tu mensaje...",
       success: "Mensaje enviado correctamente. Te contactaremos pronto.",
-      error: "No pudimos enviar tu mensaje ahora. Intentalo nuevamente."
+      error: "No pudimos enviar tu mensaje ahora. Inténtalo nuevamente."
     }
   };
 
   const text = messages[pageLang] || messages.en;
 
   function setStatus(message, type = "") {
-    if (!statusNode) {
-      return;
-    }
+    if (!statusNode) return;
 
     statusNode.textContent = message;
     statusNode.classList.remove("success", "error");
@@ -47,11 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  // ✅ Initialize EmailJS safely
+  if (window.emailjs && typeof window.emailjs.init === "function") {
+    window.emailjs.init("cF-aWnWqc8T5iFeZ2");
+  } else {
+    console.error("EmailJS not loaded properly.");
+  }
 
-    if (!form.checkValidity()) {
-      form.reportValidity();
+  // ✅ Handle form submit
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault(); // 🚫 stop page refresh
+    console.log("Form submission intercepted");
+
+    if (!window.emailjs || typeof window.emailjs.sendForm !== "function") {
+      console.error("EmailJS not available at submit time.");
+      setStatus(text.error, "error");
       return;
     }
 
@@ -59,28 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setStatus(text.sending);
 
     try {
-      const formData = new FormData(form);
-      const response = await fetch(contactEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.get("user_name"),
-          email: formData.get("user_email"),
-          phone: formData.get("user_phone"),
-          message: formData.get("message"),
-          page: window.location.pathname
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(`Contact request failed (${response.status}): ${errorData.error || "unknown_error"}`);
-      }
+      await window.emailjs.sendForm(
+        "service_d4s4v4q",
+        "template_quek7dx",
+        form
+      );
 
       form.reset();
       setStatus(text.success, "success");
     } catch (error) {
-      console.error("Contact send error:", error);
+      console.error("EmailJS send error:", error);
       setStatus(text.error, "error");
     } finally {
       submitButton?.removeAttribute("disabled");

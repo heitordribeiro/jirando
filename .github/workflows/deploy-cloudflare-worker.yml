@@ -32,15 +32,9 @@ jobs:
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing GitHub secret: CLOUDFLARE_API_TOKEN"; exit 1; }
           test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Missing GitHub secret: CLOUDFLARE_ACCOUNT_ID"; exit 1; }
-          test -n "$EMAILJS_SERVICE_ID" || { echo "Missing GitHub secret: EMAILJS_SERVICE_ID"; exit 1; }
-          test -n "$EMAILJS_TEMPLATE_ID" || { echo "Missing GitHub secret: EMAILJS_TEMPLATE_ID"; exit 1; }
-          test -n "$EMAILJS_PUBLIC_KEY" || { echo "Missing GitHub secret: EMAILJS_PUBLIC_KEY"; exit 1; }
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
-          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
-          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
 
       - name: Verify Cloudflare authentication
         run: npx --yes wrangler@latest whoami
@@ -85,17 +79,3 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Configure EmailJS Worker secrets
-        working-directory: cloudflare
-        shell: bash
-        run: |
-          printf "%s" "$EMAILJS_SERVICE_ID" | npx --yes wrangler@latest secret put EMAILJS_SERVICE_ID
-          printf "%s" "$EMAILJS_TEMPLATE_ID" | npx --yes wrangler@latest secret put EMAILJS_TEMPLATE_ID
-          printf "%s" "$EMAILJS_PUBLIC_KEY" | npx --yes wrangler@latest secret put EMAILJS_PUBLIC_KEY
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
-          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
-          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
