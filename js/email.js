@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const pathName = window.location.pathname.toLowerCase();
   const pageLang = pathName.includes("pt-br") ? "pt" : pathName.includes("es-es") ? "es" : "en";
+  const contactEndpoint = ["localhost", "127.0.0.1"].includes(window.location.hostname)
+    ? "https://www.jirando.com/api/contact"
+    : "/api/contact";
 
   const messages = {
     en: {
@@ -57,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const formData = new FormData(form);
-      const response = await fetch("/api/contact", {
+      const response = await fetch(contactEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -70,7 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!response.ok) {
-        throw new Error(`Contact request failed (${response.status})`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`Contact request failed (${response.status}): ${errorData.error || "unknown_error"}`);
       }
 
       form.reset();

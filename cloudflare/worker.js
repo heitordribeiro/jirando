@@ -164,13 +164,7 @@ async function registerAccess(request, db) {
 }
 
 function getRequiredEnv(env, key) {
-  const value = env[key];
-
-  if (!value) {
-    throw new Error(`Missing Worker secret: ${key}`);
-  }
-
-  return value;
+  return cleanString(env[key]);
 }
 
 function cleanString(value) {
@@ -186,16 +180,24 @@ async function sendContactEmail(request, env) {
   const page = normalizePage(body.page);
 
   if (!name || !email || !message) {
-    return jsonResponse({ error: "Missing required contact fields" }, 400);
+    return jsonResponse({ error: "missing_required_contact_fields" }, 400);
+  }
+
+  const serviceId = getRequiredEnv(env, "EMAILJS_SERVICE_ID");
+  const templateId = getRequiredEnv(env, "EMAILJS_TEMPLATE_ID");
+  const publicKey = getRequiredEnv(env, "EMAILJS_PUBLIC_KEY");
+
+  if (!serviceId || !templateId || !publicKey) {
+    return jsonResponse({ error: "missing_email_secret" }, 500);
   }
 
   const emailResponse = await fetch(EMAILJS_API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      service_id: getRequiredEnv(env, "EMAILJS_SERVICE_ID"),
-      template_id: getRequiredEnv(env, "EMAILJS_TEMPLATE_ID"),
-      user_id: getRequiredEnv(env, "EMAILJS_PUBLIC_KEY"),
+      service_id: serviceId,
+      template_id: templateId,
+      user_id: publicKey,
       template_params: {
         user_name: name,
         user_email: email,
@@ -207,7 +209,7 @@ async function sendContactEmail(request, env) {
   });
 
   if (!emailResponse.ok) {
-    return jsonResponse({ error: "Email service failed" }, 502);
+    return jsonResponse({ error: "emailjs_rejected" }, 502);
   }
 
   return jsonResponse({ ok: true });
@@ -215,10 +217,6 @@ async function sendContactEmail(request, env) {
 
 export default {
   async fetch(request, env) {
-    if (!env.DB) {
-      return jsonResponse({ error: "Missing D1 binding: DB" }, 500);
-    }
-
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: JSON_HEADERS });
     }
@@ -233,6 +231,10 @@ export default {
     }
 
     try {
+      if ((isApiAccess || isAccessFile) && !env.DB) {
+        return jsonResponse({ error: "missing_d1_binding" }, 500);
+      }
+
       if ((isApiAccess || isAccessFile) && request.method === "GET") {
         return jsonResponse(await readAccess(env.DB));
       }
@@ -247,7 +249,7 @@ export default {
 
       return jsonResponse({ error: "Method not allowed" }, 405);
     } catch (error) {
-      return jsonResponse({ error: error.message || "Access counter error" }, 500);
+      return jsonResponse({ error: "worker_error" }, 500);
     }
   }
 };
