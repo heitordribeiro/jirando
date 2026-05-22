@@ -85,29 +85,8 @@ async function readAccess(db) {
     .prepare("SELECT total, last_accessed_at FROM access_totals WHERE id = ?")
     .bind("site")
     .first();
-  const pages = await db
-    .prepare("SELECT page, total FROM access_pages ORDER BY page")
-    .all();
-  const visitors = await db
-    .prepare(
-      `SELECT ip, total, first_seen_at, last_seen_at, last_counted_at, last_page
-       FROM access_visitors
-       ORDER BY last_seen_at DESC`
-    )
-    .all();
-
   return {
     total: Number(totalRow?.total) || 0,
-    pages: Object.fromEntries((pages.results || []).map((row) => [row.page, Number(row.total) || 0])),
-    uniqueIps: visitors.results?.length || 0,
-    visitors: (visitors.results || []).map((row) => ({
-      ip: row.ip,
-      total: Number(row.total) || 0,
-      firstSeenAt: row.first_seen_at,
-      lastSeenAt: row.last_seen_at,
-      lastCountedAt: row.last_counted_at,
-      lastPage: row.last_page
-    })),
     lastAccessedAt: totalRow?.last_accessed_at || null
   };
 }

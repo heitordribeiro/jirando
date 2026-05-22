@@ -11,11 +11,9 @@ https://www.jirando.com/access-count.json
 The JSON includes:
 
 - `total`: counted visits across the site.
-- `pages`: counted visits by page.
-- `uniqueIps`: number of IPs recorded.
-- `visitors`: IP-level records with first seen, last seen, last counted, last page, and counted visits for that IP.
+- `lastAccessedAt`: last counted access time.
 
-A visit is counted only when the IP is new or when the same IP accesses the site at least 24 hours after its previous counted access. Switching from one language page to another within that 24-hour window updates the visitor's `lastSeenAt` and `lastPage`, but does not increment `total` or page counts.
+A visit is counted only when the IP is new or when the same IP accesses the site at least 24 hours after its previous counted access. IPs are stored internally for deduplication, but they are not exposed by the public JSON endpoint. Switching from one language page to another within that 24-hour window does not increment `total`.
 
 ## Setup
 
