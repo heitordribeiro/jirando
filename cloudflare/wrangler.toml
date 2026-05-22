@@ -1,0 +1,13 @@
+name = "jirando-access-counter"
+main = "worker.js"
+compatibility_date = "2026-05-22"
+
+routes = [
+  { pattern = "www.jirando.com/api/access", zone_name = "jirando.com" },
+  { pattern = "www.jirando.com/access-count.json", zone_name = "jirando.com" }
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "jirando_access_counter"
+database_id = "replace_with_cloudflare_d1_database_id"

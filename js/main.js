@@ -130,6 +130,28 @@ function updateYear() {
   });
 }
 
+async function registerAccess() {
+  if (window.location.protocol === "file:") {
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/access", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ page: window.location.pathname })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to register access (${response.status})`);
+    }
+
+    await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   await Promise.all([
     loadPartial("header-placeholder", "partials/header.html"),
@@ -141,4 +163,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSmoothScroll();
   initActiveSection();
   updateYear();
+  registerAccess();
 });
