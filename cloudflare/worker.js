@@ -23,19 +23,25 @@ function normalizePage(page) {
 }
 
 async function ensureTables(db) {
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS access_totals (
+  await db
+    .prepare(
+      `CREATE TABLE IF NOT EXISTS access_totals (
       id TEXT PRIMARY KEY,
       total INTEGER NOT NULL DEFAULT 0,
       last_accessed_at TEXT
-    );
+    )`
+    )
+    .run();
 
-    CREATE TABLE IF NOT EXISTS access_pages (
+  await db
+    .prepare(
+      `CREATE TABLE IF NOT EXISTS access_pages (
       page TEXT PRIMARY KEY,
       total INTEGER NOT NULL DEFAULT 0,
       last_accessed_at TEXT
-    );
-  `);
+    )`
+    )
+    .run();
 }
 
 async function readAccess(db) {
