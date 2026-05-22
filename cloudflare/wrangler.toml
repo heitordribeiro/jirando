@@ -10,4 +10,4 @@ routes = [
 [[d1_databases]]
 binding = "DB"
 database_name = "jirando_access_counter"
-database_id = "f96a464b-9e57-46e0-929d-2e939709387e"
+database_id = "resolved_by_github_actions"

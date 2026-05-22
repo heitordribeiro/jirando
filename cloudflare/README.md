@@ -11,13 +11,12 @@ https://www.jirando.com/access-count.json
 ## Setup
 
 1. In the Cloudflare dashboard, create a D1 database named `jirando_access_counter`.
-2. Copy its database ID into `cloudflare/wrangler.toml`, replacing `replace_with_cloudflare_d1_database_id`.
-3. In GitHub, add these repository secrets:
+2. In GitHub, add these repository secrets:
 
    - `CLOUDFLARE_API_TOKEN`
    - `CLOUDFLARE_ACCOUNT_ID`
 
-The API token needs permission to edit Workers and D1 for the `jirando.com` account.
+The API token needs permission to edit Workers and D1 for the `jirando.com` account. The workflow resolves the D1 database ID by name during deployment, so the database must exist in the same Cloudflare account used by `CLOUDFLARE_ACCOUNT_ID`.
 
 ## Deploy From GitHub
 

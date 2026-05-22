@@ -36,6 +36,37 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: Resolve D1 database ID
+        working-directory: cloudflare
+        shell: bash
+        run: |
+          D1_LIST="$(npx --yes wrangler@latest d1 list --json)"
+          export D1_LIST
+          DB_ID="$(node -e "
+            const payload = JSON.parse(process.env.D1_LIST);
+            const databases = Array.isArray(payload) ? payload : payload.result || [];
+            const match = databases.find((database) => database.name === 'jirando_access_counter');
+            if (match) process.stdout.write(match.uuid || match.id || '');
+          ")"
+
+          if [ -z "$DB_ID" ]; then
+            echo "Could not find D1 database named jirando_access_counter in this Cloudflare account."
+            echo "Create it in the same account used by CLOUDFLARE_ACCOUNT_ID, or update the GitHub secret to the correct account."
+            exit 1
+          fi
+
+          export DB_ID
+          node -e "
+            const fs = require('fs');
+            const file = 'wrangler.toml';
+            const id = process.env.DB_ID;
+            const config = fs.readFileSync(file, 'utf8').replace(/database_id = \"[^\"]*\"/, 'database_id = \"' + id + '\"');
+            fs.writeFileSync(file, config);
+          "
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Deploy Worker
         working-directory: cloudflare
         run: npx --yes wrangler@latest deploy
