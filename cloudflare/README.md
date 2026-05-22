@@ -16,7 +16,14 @@ https://www.jirando.com/access-count.json
    - `CLOUDFLARE_API_TOKEN`
    - `CLOUDFLARE_ACCOUNT_ID`
 
-The API token needs permission to edit Workers and D1 for the `jirando.com` account. The workflow resolves the D1 database ID by name during deployment, so the database must exist in the same Cloudflare account used by `CLOUDFLARE_ACCOUNT_ID`.
+`CLOUDFLARE_API_TOKEN` must be the token value, not the token name or token ID. Create a custom token with these permissions scoped to the account/zone that owns `jirando.com`:
+
+- Account > Cloudflare Workers Scripts > Edit
+- Account > D1 > Edit
+- Zone > Zone > Read
+- Zone > Workers Routes > Edit
+
+`CLOUDFLARE_ACCOUNT_ID` must be the account ID from the same Cloudflare account where the D1 database exists. The workflow resolves the D1 database ID by name during deployment, so the database must exist in that account.
 
 ## Deploy From GitHub
 
